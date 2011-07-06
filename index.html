@@ -1,0 +1,144 @@
+<html>
+<head>
+	<link rel="stylesheet" href="javascriptis.css" type="text/css" />
+	<script type="text/javascript" src="javascriptis.deps/jquery.js"></script>
+	<script type="text/javascript" src="javascriptis.deps/jquery.tmpl.js"></script>
+	<script type="text/javascript" src="javascriptis/jsis.js"></script>
+	<script type="text/javascript" src="javascriptis/core/Event.js"></script>
+	<script type="text/javascript" src="javascriptis/core/EventListener.js"></script>
+	<script type="text/javascript" src="javascriptis/core/Element.js"></script>
+	<script type="text/javascript" src="javascriptis/core/DragAndDropManager.js"></script>
+	<script type="text/javascript" src="javascriptis/utils/WindowManager.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/AbstractElement.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/AbstractContainer.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/AbstractZeroContainer.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/AbstractSingleContainer.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/AbstractMultiContainer.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/Standard.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/Centered.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/Fit.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/Vertical.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/Horizontal.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/Body.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/Empty.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/Pane.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/Window.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/form/Button.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/titlebar/Titlebar.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/titlebar/Button.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/titlebar/Title.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/buttonbar/Buttonbar.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/buttonbar/Button.js"></script>
+	<script type="text/javascript">
+		/*var Colt = jsis.$class(jsis.core.EventListener,
+		{
+			$constructor:		function()
+			{
+				this.$super();
+				this.addListener('pifpaf', function() 
+				{
+					alert('pifpaf');
+				});
+			}
+		});
+		var colt = new Colt();
+		colt.fireEvent('pifpaf');*/
+ 		
+ 		/*var Test = jsis.$class(jsis.Base, 
+ 		{
+ 	 		$constructor: function(x){this.bar = '1'+x;},
+ 	 		foo: function(){console.log('Test'); return this.bar;}
+ 		});
+ 		var Test2 = jsis.$class(Test, 
+ 		{
+ 	 		$constructor: function(x){this.bar = '2'+x;},
+ 	 		foo: function(){('Test2');return this.$super();}
+ 		});
+ 		var Test3 = jsis.$class(Test2, 
+ 		{
+ 	 		$constructor: function(x){this.$super(x);},
+ 	 		foo: function(){console.log('Test3');return this.$super();}
+ 		});
+ 		var test = new Test3('z');
+ 		test.bar = 's';
+ 		console.log(test.foo());
+ 		console.log(test.bar);*/
+ 		var el;
+ 		jsis.ready(function()
+ 		{
+ 	 		/*el = jsis.find("body > div");
+ 	 		el.addListener('click', function(e)
+ 	 		{
+ 	 	 		this.stopAnimation();
+ 	 	 		this.animate({left:"+=50", top:"+=50",height:"+=50",width:"+=50"});
+ 	 		});
+ 	 		el.addListener('rightclick', function(e)
+ 	 		{
+ 	 	 		this.stopAnimation();
+ 	 	 		this.animate({left:"-=50", top:"-=50",height:"-=50",width:"-=50"});
+ 	 	 		return false;
+ 	 		});
+ 	 		el.addListener('middleclick', function(e)
+	 		{
+ 	 	 		this.stopAnimation();
+	 	 		this.animate({left:"0", top:"0",height:"50",width:"50"});
+	 		});*/
+
+	 		var se1 = new jsis.ui.blocks.Standard();
+	 		var se2 = new jsis.ui.blocks.Standard();
+	 		var se3 = new jsis.ui.blocks.Standard();
+	 		var se4 = new jsis.ui.blocks.Standard();
+	 		se1.height = 0;
+	 		se2.height = 0.2;
+	 		se3.width = 0;
+	 		se4.width = 100;
+	 		se1.contentHtml = "<img src='http://s2.trakos.pl/test.jpg' />";
+	 		se2.contentHtml = "<img src='http://s2.trakos.pl/test.jpg' />";
+	 		se3.contentHtml = "<img src='http://s2.trakos.pl/test.jpg' />";
+	 		se4.contentHtml = "<img src='http://s2.trakos.pl/test.jpg' />";
+
+	 		var sv = new jsis.ui.blocks.Vertical([se3,se4]);
+
+	 		var sh = new jsis.ui.blocks.Horizontal([se1,sv,se2]);
+	 		sh.width = 800;
+	 		sh.height = 700;
+
+	 		var sc = new jsis.ui.blocks.Centered(sh);
+	 		sc.styleVariant = "empty";
+	 		sc.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
+	 		
+	 		var se5 = new jsis.ui.blocks.Standard();
+	 		se5.contentHtml = "<p>pięć</p>";
+	 		var se6 = new jsis.ui.blocks.Standard();
+	 		se6.contentHtml = "<p>sześć</p>";
+	 		
+	 		titlebar = new jsis.ui.titlebar.Titlebar();
+	 		titlebar.title = "Tytuł okna";
+	 		titlebar.buttons = [ titlebar.$self.X ];
+	 		buttonbar = new jsis.ui.buttonbar.Buttonbar();
+	 		buttonbar.buttons = [ "OKEJKA" ];
+	 		sp = new jsis.ui.blocks.Pane(se5,titlebar,buttonbar);
+	 		//sp.toolbartop = new jsis.ui.ToolbarContainer();
+	 		//sp.toolbarbottom = new jsis.ui.ToolbarContainer();
+
+	 		var sb = new jsis.ui.blocks.Body(sp);
+	 		sb.show();
+
+	 		var titlebar2 = new jsis.ui.titlebar.Titlebar();
+	 		titlebar2.title = "Tytuł okna";
+	 		titlebar2.buttons = [ titlebar2.$self.X ];
+	 		var buttonbar2 = new jsis.ui.buttonbar.Buttonbar();
+	 		buttonbar2.buttons = [ "OKEJKA" ];
+	 		var win = new jsis.ui.blocks.Window(se6,titlebar,buttonbar);
+	 		win.width = 400;
+	 		win.height = 300;
+	 		win.show();
+	 		
+ 		});
+	</script>
+</head>
+<body>
+	<div style="height:50px;width:50px;background:#ccc;position:absolute;">
+	</div>
+</body>
+</html>
