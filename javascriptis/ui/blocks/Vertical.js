@@ -1,4 +1,4 @@
-jsis.ui.blocks.Vertical = jsis.$class(jsis.ui.AbstractMultiContainer, 
+jsis.ui.blocks.Vertical = jsis.$class(jsis.ui.AbstractMultiBlockContainer, 
 {
 	_refreshChildren:	function(children, forceInvisible)
 	{

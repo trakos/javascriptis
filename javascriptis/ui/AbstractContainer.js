@@ -15,21 +15,26 @@ jsis.ui.AbstractContainer = jsis.$class(jsis.ui.AbstractElement,
 		this.refresh(false, true);
 		this._normalizeContent(this._getContent());
 		this._renderChildren(this._content);
-	},
-	refresh:			function(forceInvisible, dontRecurse)
-	{
-		this.$super(forceInvisible, dontRecurse);
-		if ( !dontRecurse )
-		{
-			this._refreshChildren(this._content, forceInvisible);
-		}
+		this.fireEvent('rendered');
 	},
 	show:				function()
 	{
 		this._visible = true;
 		this.render();
-		this._div.setCss('display','block');
+		this._element.setCss('display','block');
 		this.refresh();
+	},
+	refresh:			function(forceInvisible, dontRecurse)
+	{
+		if ( !forceInvisible && !this._visible )
+		{
+			return;
+		}
+		this._refreshElements();
+		if ( !dontRecurse )
+		{
+			this._refreshChildren(this._content, forceInvisible);
+		}
 	},
 	_getContent:		function()
 	{

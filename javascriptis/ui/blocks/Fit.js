@@ -1,4 +1,4 @@
-jsis.ui.blocks.Fit = jsis.$class(jsis.ui.AbstractSingleContainer, 
+jsis.ui.blocks.Fit = jsis.$class(jsis.ui.AbstractSingleBlockContainer, 
 {
 	_refreshChild:		function(child, forceInvisible)
 	{

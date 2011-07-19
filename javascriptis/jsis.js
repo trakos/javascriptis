@@ -179,14 +179,17 @@ var jsis =
 	{
 		jsis.$.fx.off = false;
 	},
-	ready:		function( handler )
+	ready:				function( handler )
 	{
 		this.$( handler );
 	},
+	resourcesUrl:		"javascriptis.res",
+	emptyTpl:			$.template( null, ''),
+	getEmptyImg:		function(){ return jsis.resourcesUrl+'/empty.gif'; },
 	settings:
 	{
 		defaultStyle:	'jsis',
-		styles:
+		blockStyles:
 		{
 			jsis:
 			{
@@ -194,27 +197,33 @@ var jsis =
 				{
 					if ( element.styleVariant ) return element.styleVariant;
 					if ( element._uiType == "blocks.Body" ) return "empty";
+					if ( element._uiType == "blocks.Window" ) return "window";
 					return "standard";
 				},
 				standard:
 				{
-					wrapper:		$.template( null, '<span>start</span>{{html body}}<span>koniec</span>'),
-					innerMargins:	[0,40], //w,h
-					outerMargins:	[2,2],
+					wrapper:		$.template( null, '{{html body}}'),
+					wrapperTitle:	$.template( null, '<div class="jsis-titlebar">{{html title}}</div>{{html body}}'),
+					innerMargins:	[0,0], //w,h
+					outerMargins:	[0,0],
 					bodyCls:		"jsis-body",
 					wrapCls:		"jsis-wrap"
 				},
-				button:
+				window:
 				{
-					wrapper:		$.template( null, '{{html body}}'),
-					innerMargins:	[0,0], //w,h
+					wrapper:		$.template( null, '<div class="jsis-window-border-top"><div class="jsis-window-titlebar"></div></div><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}</div></div></div>'),
+					wrapperTitle:	$.template( null, '<div class="jsis-window-border-top">{{html title}}</div><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}</div></div></div>'),
+					title:			$.template( null, '<span class="jsis-window-titlebuttons jsis-window-titlebuttons-left">{{html leftButtons}}</span><span class="jsis-window-titlebuttons jsis-window-titlebuttons-right">{{html rightButtons}}</span><img src="{{html iconSrc}}" class="jsis-window-titleicon" /><span class="jsis-window-title">{{html title}}</span>'),
+					innerMargins:	[8,40], //w,h
 					outerMargins:	[2,2],
-					bodyCls:		"jsis-button-body",
-					wrapCls:		"jsis-button-wrap"
+					titleCls:		"jsis-window-titlebar",
+					bodyCls:		"jsis-window-body",
+					wrapCls:		"jsis-window-wrap"
 				},
 				empty:
 				{
 					wrapper:		$.template( null, '{{html body}}'),
+					wrapperTitle:	$.template( null, '{{html body}}'),
 					innerMargins:	[0,0], //w,h
 					outerMargins:	[0,0],
 					bodyCls:		"jsis-empty-body",

@@ -1,0 +1,422 @@
+	
+	
+	
+	
+	
+	.jsis-form-label
+	{
+		font-family:	sans-serif;
+		font-size:		12px;
+	}
+	
+	.jsis-form-field, .jsis-form-textarea
+	{
+		background:		url(images/form_field_bg.png) #fff repeat-x scroll;
+		border:			1px solid #c0c1c3;
+		font-family:	sans-serif;
+		font-size:		12px;
+		padding:		3px 2px;
+		resize:			none;
+		color:			#535353;
+	}
+		
+	
+	.jsis-form-field:hover, .jsis-form-textarea:hover
+	{
+		border-color:	#dbdbde;
+	}
+	
+	.jsis-form-field:active, .jsis-form-field:focus, .jsis-form-textarea:active, .jsis-form-textarea:focus
+	{
+		border-color:	#dea4a4;
+	}
+	
+		.jsis-form-radio
+		{
+			height:			13px;
+			width:			13px;
+			background:		url(images/form_radio.png);
+			border:			none;
+			padding:		0;
+			vertical-align:	-4px;
+			margin:			5px 5px -5px 0;
+		}
+		
+		.jsis-form-radio-checked
+		{
+			background-position: 0 -13px;
+		}
+		
+		.jsis-form-radio-container:hover .jsis-form-radio
+		{
+			background-position: -13px 0;
+		}
+		
+		.jsis-form-radio-container:hover .jsis-form-radio-checked
+		{
+			background-position: -13px -13px;
+		}
+		
+		.jsis-form-radio-container:active .jsis-form-radio
+		{
+			background-position: 0 -26px;
+		}
+	
+		.jsis-form-checkbox
+		{
+			height:			13px;
+			width:			13px;
+			background:		url(images/form_checkbox.png);
+			border:			none;
+			padding:		0;
+			vertical-align:	-4px;
+			margin:			5px 5px -5px 0;
+		}
+		
+		.jsis-form-checkbox-checked
+		{
+			background-position: 0 -13px;
+		}
+		
+		.jsis-form-checkbox-container:hover .jsis-form-checkbox
+		{
+			background-position: -13px 0;
+		}
+		
+		.jsis-form-checkbox-container:hover .jsis-form-checkbox-checked
+		{
+			background-position: -13px -13px;
+		}
+		
+		.jsis-form-checkbox-container:active .jsis-form-checkbox
+		{
+			background-position: 0 -26px;
+		}
+		
+	
+			
+		.jsis-form-field-trigger
+		{
+			background:		url(images/form_triggers.png);
+			width:			20px;
+			height:			23px;
+			float:			right;
+			cursor:			pointer;
+		}
+			
+		.jsis-form-field-trigger-combobox:hover
+		{
+			background-position:	-20px 0;
+		}
+			
+		.jsis-form-field-trigger-combobox:active, .jsis-form-field-trigger-combobox-active
+		{
+			background-position:	-40px 0;
+		}
+		
+		.jsis-form-field-trigger-date
+		{
+			background-position:	0 -22px;
+		}
+		
+		.jsis-form-field-trigger-date:hover
+		{
+			background-position:	-20px -22px;
+		}
+		
+		.jsis-form-field-trigger-date:active, .jsis-form-field-trigger-date-active
+		{
+			background-position:	-40px -22px;
+		}
+		
+		.jsis-form-field-trigger-double
+		{
+			background:				none;
+		}
+		
+			.jsis-form-field-trigger-up
+			{
+				background:		url(images/form_triggers_spinner.png);
+				height:			12px;
+				width:			20px;
+			}
+			
+			.jsis-form-field-trigger-up:hover
+			{
+				background-position: -20px 0;
+			}
+			
+			.jsis-form-field-trigger-up:active
+			{
+				background-position: -40px 0;
+			}
+		
+			.jsis-form-field-trigger-down
+			{
+				background:		url(images/form_triggers_spinner.png);
+				background-position: 0 -12px;
+				height:			12px;
+				width:			20px;
+			}
+			
+			.jsis-form-field-trigger-down:hover
+			{
+				background-position: -20px -12px;
+			}
+			
+			.jsis-form-field-trigger-down:active
+			{
+				background-position: -40px -12px;
+			}
+			
+			.jsis-spinner
+			{
+				background:			url(images/slider_bg_off.png);
+				margin-top:			7px;
+				height:				10px;
+				position:			relative;
+			}
+			
+			.jsis-spinner-start
+			{
+				background:			url(images/slider_bg_start.png) no-repeat left;
+				padding-left:		5px;
+				height:				10px;
+			}
+			
+			.jsis-spinner-end
+			{
+				background:			url(images/slider_bg_end.png) no-repeat right;
+				padding-right:		5px;
+				height:				10px;
+			}
+			
+			.jsis-spinner-on
+			{
+				background:			url(images/slider_bg_on.png);
+				height:				10px;
+			}
+			
+				.jsis-spinner-handler
+				{
+					background:			url(images/slider_handler.png);
+					height:				18px;
+					width:				17px;
+					position:			absolute;
+					top:				-4px;
+					cursor:				pointer;
+					border:				none;
+				}
+			
+				.jsis-spinner-handler:hover
+				{
+					background-position: -17px 0;
+				}
+			
+				.jsis-spinner-handler:active
+				{
+					background-position: -34px 0;
+				}
+		
+			
+			.jsis-loader
+			{
+				background:			url(images/loader_bg_off.png);
+				margin-top:			3px;
+				height:				18px;
+				position:			relative;
+			}
+			
+				.jsis-loader-text
+				{
+					font-family:		sans-serif;
+					font-size:			10px;
+					color:				#535353;
+					position:			absolute;
+					top:				0;
+					line-height:		16px;
+					text-align:			center;
+					width:				100%;
+				}
+			
+			.jsis-loader-start
+			{
+				background:			url(images/loader_bg_start.png) no-repeat left;
+				padding-left:		1px;
+				height:				18px;
+			}
+			
+			.jsis-loader-end
+			{
+				background:			url(images/loader_bg_end.png) no-repeat right;
+				padding-right:		1px;
+				height:				18px;
+			}
+			
+			.jsis-loader-on
+			{
+				background:			url(images/loader_bg_on.png);
+				height:				18px;
+			}	
+			
+		.jsis-form-combobox-menu
+		{
+			background:			#eff2f5;
+			border:				1px solid #cfcfcf;
+			overflow:			auto;
+		}
+		
+			.jsis-form-combobox-menu-position
+			{
+				font-size:			12px;
+				font-family:		sans-serif;
+				line-height:		19px;
+				padding:			0 5px;
+				height:				20px;
+				cursor:				pointer;
+				color:				#535353;
+			}
+		
+			.jsis-form-combobox-menu-position:hover
+			{
+				background:		#e5edf5;
+			}
+	
+			.jsis-form-combobox-menu-position:active, .jsis-form-combobox-menu-position-active
+			{
+				background:		#c4d6e9;
+			}
+			
+		.jsis-form-date-menu
+		{
+			background:			#fff;
+			border:				1px solid #cfcfcf;
+		}
+			
+			.jsis-form-date-menu-month
+			{
+				height:				22px;
+				background:			url(images/form_calendar_month_bg.png) #7ca6d0 repeat-x top;
+				position:			relative;
+			}
+			
+				.jsis-form-date-menu-month-prev, .jsis-form-date-menu-month-next
+				{
+					position:			absolute;
+					background:			url(images/form_calendar_month_arrows.png);
+					height:				15px;
+					width:				15px;
+					cursor:				pointer;
+					top:				3px;				
+				}
+				
+				.jsis-form-date-menu-month-prev
+				{
+					left:				5px;
+				}
+				
+				.jsis-form-date-menu-month-prev:hover
+				{
+					background-position:-15px 0;
+				}
+				
+				.jsis-form-date-menu-month-prev:active
+				{
+					background-position:-30px 0;
+				}
+				
+				.jsis-form-date-menu-month-next
+				{
+					right:				5px;
+					background-position:0 -15px;
+				}
+				
+				.jsis-form-date-menu-month-next:hover
+				{
+					background-position:-15px -15px;
+				}
+				
+				.jsis-form-date-menu-month-next:active
+				{
+					background-position:-30px -15px;
+				}
+			
+				.jsis-form-date-menu-month-current
+				{
+					font-size:			12px;
+					font-family:		sans-serif;
+					color:				#535353;
+					font-weight:		bold;
+					text-align:			center;
+					line-height:		22px;
+					width:				100%;
+					position:			absolute;
+					display:			block;
+				}
+				
+				.jsis-form-date-menu-week
+				{
+					background:			#eff2f5;
+					border-bottom:		1px solid #cfcfcf;
+					height:				18px;
+				}
+				
+					.jsis-form-date-menu-week span
+					{
+						font-size:			12px;
+						font-family:		sans-serif;
+						color:				#535353;
+						font-weight:		bold;
+						width:				25px;
+						float:				left;
+						text-align:			center;
+						display:			block;
+						margin:				1px;
+					}
+					
+				.jsis-form-date-menu-dayline
+				{
+					height:				25px;
+				}
+				
+					.jsis-form-date-menu-dayline span
+					{
+						font-size:			12px;
+						font-family:		sans-serif;
+						color:				#535353;
+						font-weight:		bold;
+						width:				25px;
+						height:				23px;
+						margin:				1px;
+						line-height:		25px;
+						float:				left;
+						text-align:			center;
+						display:			block;
+						cursor:				pointer;
+					}
+				
+					.jsis-form-date-menu-dayline span.next, .jsis-form-date-menu-dayline span.prev
+					{
+						font-weight:		normal;
+						color:				#bbb;
+						background:			transparent !important; 
+					}
+				
+					.jsis-form-date-menu-dayline span:hover
+					{
+						background:			url(images/form_calendar_days_bg.png);
+						background-position:0 -23px;
+					}
+				
+					.jsis-form-date-menu-dayline span:active
+					{
+						background:			url(images/form_calendar_days_bg.png);
+						background-position:-25px 0;
+					}
+				
+					.jsis-form-date-menu-dayline span.active
+					{
+						background:			url(images/form_calendar_days_bg.png);
+						background-position:-25px -23px;
+						color:				#535353;
+					}

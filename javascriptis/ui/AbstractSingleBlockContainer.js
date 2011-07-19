@@ -1,4 +1,4 @@
-jsis.ui.AbstractSingleContainer = jsis.$class(jsis.ui.AbstractContainer, 
+jsis.ui.AbstractSingleBlockContainer = jsis.$class(jsis.ui.AbstractBlockContainer, 
 {
 	_normalizeContent:	function(content)
 	{
@@ -9,5 +9,5 @@ jsis.ui.AbstractSingleContainer = jsis.$class(jsis.ui.AbstractContainer,
 			console.error("this container is of an one-child-only type, and it has received "+this._content.length+" elements!");
 		}
 	},
-	_uiType:			"AbstractSingleContainer"
+	_uiType:			"AbstractSingleBlockContainer"
 });

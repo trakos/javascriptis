@@ -1,12 +1,11 @@
-jsis.ui.blocks.Pane = jsis.$class(jsis.ui.blocks.Horizontal, 
+jsis.ui.blocks.Pane = jsis.$class(jsis.ui.blocks.Fit, 
 {
-	$constructor:		function(content,titlebar,buttonbar,renderTo)
+	$constructor:		function(content,renderTo)
 	{
-		this.titlebar = titlebar;
-		this.buttonbar = buttonbar;
+		//this.buttonbar = buttonbar;
 		this.$super(content,renderTo);
 	},
-	_getContent:		function()
+	/*_getContent:		function()
 	{
 		var content = [];
 		content.push(this.titlebar);
@@ -14,6 +13,6 @@ jsis.ui.blocks.Pane = jsis.$class(jsis.ui.blocks.Horizontal,
 		content.push(this.content);
 		content.push(this.buttonbar);
 		return content;
-	},
+	},*/
 	_uiType:			"blocks.Pane"
 });

@@ -1,14 +1,9 @@
 jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Pane, 
 {
-	$constructor:		function(content,titlebar,buttonbar,renderTo)
+	$constructor:		function(content,renderTo)
 	{
-		this.titlebar = titlebar; 
-		this.buttonbar = buttonbar;
-		this.$super(content,titlebar,buttonbar,renderTo);
-		this.relayEvent(this.titlebar, 'titleClick');
-		this.relayEvent(this.titlebar, 'titleMouseUp');
-		this.relayEvent(this.titlebar, 'titleMouseDown');
-		this.titlebar.addListener("titleMouseDown", function(titlebar,titleComponent,e)
+		this.$super(content,renderTo);
+		this._titlebar.addListener("titleMouseDown", function(titlebar,titleComponent,e)
 		{
 			var dd = jsis.core.DragAndDropManager.get();
 			dd.start();
@@ -45,14 +40,14 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Pane,
 	},
 	setZIndex:			function(zIndex)
 	{
-		this._div.setCss("z-index",zIndex);
+		this._element.setCss("z-index",zIndex);
 	},
 	_renderElements:		function()
 	{
 		this.$super();
 		var manager = jsis.utils.WindowManager.get(this.renderTo);
 		manager.addWindow(this);
-		this._div.addListener("click", function(element, event)
+		this._element.addListener("click", function(element, event)
 		{
 			return this.fireEvent("focus", [this, event]);
 		}, this);

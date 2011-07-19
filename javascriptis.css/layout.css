@@ -1,0 +1,179 @@
+	
+	
+	.jsis-wrap, .jsis-wrap-darker, jsis-button-wrap
+	{
+		background:		#efefef;
+		margin:			0;
+		padding:		0;
+	}
+	
+	.jsis-wrap-border, .jsis-wrap-darker-border
+	{
+		border:			1px solid #bec4ca;
+	}
+	
+	.jsis-body, .jsis-body-darker, jsis-button-body
+	{
+		margin:			0;
+		padding:		0;
+	}
+	
+	.jsis-wrap, .jsis-window-body
+	{
+		background:		#f2f5f8;
+	}
+	
+	.jsis-wrap-darker
+	{
+		background:		#e0e9f2;
+	}
+	
+	.jsis-titlebar
+	{
+		height:			21px;
+		line-height:	18px;
+		padding:		2px 0 2px 5px;
+		font-weight:	bold;
+		font-size:		12px;
+		color:			#6699cc;
+		font-family:	verdana, sans-serif;
+		background:		url(images/header_bg.png) #e3e3e3 repeat-x top;
+	}
+	
+		.jsis-titlebuttons-left
+		{
+			float:			left;
+		}
+		
+		.jsis-titlebuttons-right
+		{
+			float:			right;
+		}
+		
+		.jsis-titlebuttons
+		{
+			padding:		0 5px;
+		}
+		
+			.jsis-titlebutton
+			{
+				width:			14px;
+				height:			15px;
+				background:		url(images/buttons_pane.png);
+				display:		block;
+				float:			left;
+				padding:		1.5px 1px;
+				margin:			0 1px;
+			}	
+		
+			.jsis-titlebutton:hover
+			{
+				background-position: 0 -18px;
+			}
+		
+			.jsis-titlebutton:active
+			{
+				background-position: 0 -36px;
+			}
+		
+			.jsis-titlebutton-red
+			{
+				background-position:-17px 0;
+			}
+		
+			.jsis-titlebutton-red:hover
+			{
+				background-position: -17px -18px;
+			}
+		
+			.jsis-titlebutton-red:active
+			{
+				background-position: -17px -36px;
+			}
+	
+				.jsis-titlebutton-icon
+				{
+					background:		url(images/buttons_icons.png);
+					height:			15px;
+					width:			15px;
+					display:		block;
+				}
+					
+					.jsis-titlebutton-icon-unpin
+					{
+						background-position:	0px 0px;
+					}
+					
+					.jsis-titlebutton-icon-pin
+					{
+						background-position:	-15px 0px;
+					}
+					
+					.jsis-titlebutton-icon-up
+					{
+						background-position:	-30px 0px;
+					}
+					
+					.jsis-titlebutton-icon-down
+					{
+						background-position:	-45px 0px;
+					}
+					
+					.jsis-titlebutton-icon-plus
+					{
+						background-position:	-60px 0px;
+					}
+					
+					.jsis-titlebutton-icon-ask
+					{
+						background-position:	0px -15px;
+					}
+				
+					.jsis-titlebutton-icon-min
+					{
+						background-position:	-15px -15px;
+					}
+				
+					.jsis-titlebutton-icon-restore
+					{
+						background-position:	-30px -15px;
+					}
+				
+					.jsis-titlebutton-icon-max
+					{
+						background-position:	-45px -15px;
+					}
+				
+					.jsis-titlebutton-icon-x
+					{
+						background-position:	-60px -15px;
+					}
+	
+	.jsis-button-wrap
+	{
+		background:		url(images/button_bg.png) repeat-x top;
+		line-height:	12px;
+		height:			22px;
+		font-size:		11px;
+		padding:		2px 10px;
+		margin:			5px;
+		width:			100px;
+		text-align:		center;
+		cursor:			pointer;
+		color:			#333;
+		float:			right;
+		-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;
+		border:			1px solid #c0c1c3;
+	}
+	
+	.jsis-button-wrap:hover
+	{
+		background:		url(images/button_bg_hover.png) repeat-x;
+	}
+	
+	.jsis-button-wrap:active
+	{
+		background:		url(images/button_bg_active.png) repeat-x;
+		color:			#79a4cd;
+		border-color:	#dbdbde;
+	}

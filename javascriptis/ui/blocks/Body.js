@@ -11,7 +11,7 @@ jsis.ui.blocks.Body = jsis.$class(jsis.ui.blocks.Fit,
 		this.renderTo = jsis.find("body");
 		this.$super();
 	},
-	refresh:			function(forceInvisible, dontRecurse)
+	_refreshElements:	function()
 	{
 		var overflow = jsis.find('body').getCss("overflow");
 		jsis.find('body').setCss("overflow", "hidden");
@@ -20,7 +20,7 @@ jsis.ui.blocks.Body = jsis.$class(jsis.ui.blocks.Fit,
 		jsis.find('body').setCss("overflow", overflow);
 		this.top = this.left = 0; 
 		this.bottom = this.right = null;
-		this.$super(forceInvisible, dontRecurse);
+		this.$super();
 	},
 	_uiType:			"blocks.Body"
 });

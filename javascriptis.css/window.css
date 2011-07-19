@@ -1,0 +1,117 @@
+	.jsis-window-titlebar
+	{
+		padding:		2px 5px 0 25px;
+		font-family:	verdana, sans-serif;
+		font-size:		13px;
+		position:		relative;
+		height:			20px;
+	}
+		.jsis-window-titlebar div
+		{
+			height:			20px;
+		}
+	
+		.jsis-window-body
+		{
+			position:		relative;
+		}
+	
+		.jsis-window-titleicon
+		{
+			position:		absolute;
+			top:			4px;
+			left:			5px;
+			width:			16px;
+			height:			16px;			
+		}
+		
+		.jsis-window-titlebuttons-left
+		{
+			float:			left;
+		}
+		
+		.jsis-window-titlebuttons-right
+		{
+			float:			right;
+		}
+		
+		.jsis-window-titlebuttons
+		{
+			padding:		0 5px;
+		}
+		
+			.jsis-window-titlebutton
+			{
+				width:			14px;
+				height:			15px;
+				background:		url(images/buttons_window.png);
+				display:		block;
+				float:			left;
+				margin:			0 1px;
+				padding:		2px 3px;
+			}
+			
+			.jsis-window-titlebutton:hover
+			{
+				background-position: 0 38px;
+			}
+			
+			.jsis-window-titlebutton:active
+			{
+				background-position: 0 19px;
+			}
+			
+			.jsis-window-titlebutton-red
+			{
+				background-position: 20px 0;
+			}
+			
+			.jsis-window-titlebutton-red:hover
+			{
+				background-position: 20px 38px;
+			}
+			
+			.jsis-window-titlebutton-red:active
+			{
+				background-position: 20px 19px;
+			}
+		
+		.jsis-window-titlebar .jsis-window-title
+		{
+			line-height:	20px;
+		}
+		
+	.jsis-window-border-left
+	{
+		background:		url(images/window_border_bg.png) left repeat-y;
+		padding-left:	5px;
+	}
+	
+	.jsis-window-border-right
+	{
+		background:		url(images/window_border_bg.png) right repeat-y;
+		padding-right:	5px;
+	}
+	
+	.jsis-window-border-bottom
+	{
+		background:		url(images/window_border_bg.png) bottom repeat-x;
+		padding-bottom:	5px;
+		-webkit-border-radius: 0px 0px 4px 4px;-moz-border-radius: 0px 0px 4px 4px;border-radius: 0px 0px 4px 4px;
+	}
+	
+	.jsis-window-body
+	{
+		margin:			0;
+		padding:		0;
+	}
+	
+	.jsis-window-border-top
+	{
+		margin:			0;
+		padding:		0;
+		background:		url(images/window_border_bg.png);
+		width:			100%;
+		height:			24px;
+		-webkit-border-radius: 8px 8px 0px 0px;-moz-border-radius: 8px 8px 0px 0px;border-radius: 8px 8px 0px 0px;
+	}

@@ -1,4 +1,4 @@
-jsis.ui.blocks.Standard = jsis.$class(jsis.ui.AbstractZeroContainer, 
+jsis.ui.blocks.Standard = jsis.$class(jsis.ui.AbstractZeroBlockContainer, 
 {
 	_uiType:			"blocks.Standard",
 	contentHtml:		"",

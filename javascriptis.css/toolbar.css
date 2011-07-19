@@ -1,0 +1,98 @@
+.jsis-toolbar
+	{
+		height:			22px;
+		border-bottom:	1px solid #e0e9f2;
+		background:		#f7f8f8;
+	}
+	
+		.jsis-toolbar-left .jsis-toolbar-button
+		{
+			float:				left;
+		}
+	
+		.jsis-toolbar-right .jsis-toolbar-button
+		{
+			float:				right;
+		}
+	
+		.jsis-toolbar-button
+		{
+			color:			#535353;
+			font-family:	sans-serif;
+			font-size:		13px;
+			line-height:	14px;
+			height:			14px;
+			padding:		3px 6px;
+			margin:			2px 5px;
+			cursor:			pointer;
+			-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;
+		}
+	
+		.jsis-toolbar-button:hover
+		{
+			background:		url(images/menu_bg_hover.png) #a4bacf repeat-x top;
+			border:			1px solid #cfcfcf;
+			padding:		2px 5px;
+		}
+	
+		.jsis-toolbar-button:active, .jsis-toolbar-button-clicked
+		{
+			background:		url(images/menu_bg_active.png) #7899b7 repeat-x top left;
+			border:			1px solid #cfcfcf;
+			padding:		2px 5px;
+		}
+		
+		.jsis-toolbar-menubutton-trigger, .jsis-toolbar-menu-position-trigger
+		{
+			background:		url(images/arrows.png) no-repeat;
+			height:			5px;
+			width:			5px;
+			padding-left:	5px;
+			margin-left:	10px;
+		}
+		
+		.jsis-toolbar-menu-position-trigger
+		{
+			background-position:	-15px 0;
+			float:					right;
+			margin-top:				7px;
+		}
+		
+		.jsis-toolbar-menubutton-trigger
+		{
+			vertical-align:	-5px;
+		}
+		
+		.jsis-toolbar-menu
+		{
+			background:		#f7f8f8;
+			border:			1px solid #e0e9f2;
+		}
+		
+			.jsis-toolbar-menu-position
+			{
+				border-bottom:		1px solid #e0e9f2;
+				font-size:			12px;
+				font-family:		sans-serif;
+				line-height:		19px;
+				padding:			0 5px;
+				height:				19px;
+				cursor:				pointer;
+				color:				#535353;
+			}
+			
+			.jsis-toolbar-menu-position-last
+			{
+				border:				none;
+				line-height:		19px;
+			}
+		
+			.jsis-toolbar-menu-position:hover
+			{
+				background:		url(images/menu_bg_hover.png) #a4bacf repeat-x top;
+			}
+	
+			.jsis-toolbar-menu-position:active
+			{
+				background:		url(images/menu_bg_active.png) #7899b7 repeat-x top left;
+			}

@@ -1,4 +1,4 @@
-jsis.ui.titlebar.Titlebar = jsis.$class(jsis.ui.blocks.Vertical, 
+jsis.ui.titlebar.Titlebar = jsis.$class(jsis.ui.AbstractElement, 
 {
 	$constructor:		function()
 	{
@@ -13,9 +13,6 @@ jsis.ui.titlebar.Titlebar = jsis.$class(jsis.ui.blocks.Vertical,
 		}
 		this._titleComponent = new jsis.ui.titlebar.Title(this.title);
 		content.push(this._titleComponent);
-		this._titleComponent.addListener('click', this._onTitleClick, this);
-		this._titleComponent.addListener('mousedown', this._onTitleDown, this);
-		this._titleComponent.addListener('mouseup', this._onTitleUp, this);
 		for ( var i in this.buttons )
 		{
 			content.push(new jsis.ui.titlebar.Button(this.buttons[i]));
@@ -25,7 +22,11 @@ jsis.ui.titlebar.Titlebar = jsis.$class(jsis.ui.blocks.Vertical,
 	_renderElements:		function()
 	{
 		this.$super();
-		this._bodyDiv.setCss("overflow", "hidden");
+		this._element.setCss("overflow", "hidden");
+		jsis.$.tmpl( this.template, { title: this.title, iconSrc: this.iconSrc }).appendTo( "#"+this._element.dom.id );
+		this._element.addListener('click', this._onTitleClick, this);
+		this._element.addListener('mousedown', this._onTitleDown, this);
+		this._element.addListener('mouseup', this._onTitleUp, this);
 	},
 	_onTitleClick:			function(titleComponent,e)
 	{
@@ -39,13 +40,12 @@ jsis.ui.titlebar.Titlebar = jsis.$class(jsis.ui.blocks.Vertical,
 	{
 		return this.fireEvent("titleMouseDown", [this,titleComponent,e]);
 	},
-	_uiType:			"titlebar.Titlebar",
-	_titleComponent:	null,
 	title:				'',
-	styleVariant:		"empty",
-	buttons:			[],
-	frontButtons:		[],
-	height:				20
+	template:			jsis.emptyTpl,
+	iconSrc:			jsis.getEmptyImg(),
+	leftbuttons:		[],
+	rightButtons:		[],
+	_uiType:			"titlebar.Titlebar"
 },{
 	X:			'<span>x</span>'
 });

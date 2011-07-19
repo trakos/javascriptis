@@ -1,4 +1,4 @@
-jsis.ui.blocks.Centered = jsis.$class(jsis.ui.AbstractSingleContainer, 
+jsis.ui.blocks.Centered = jsis.$class(jsis.ui.AbstractSingleBlockContainer, 
 {
 	refresh:			function(forceInvisible, dontRecurse)
 	{
