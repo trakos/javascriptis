@@ -18,6 +18,7 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 	},
 	_renderElements:		function()
 	{
+		this._element.recreate();
 		this._element.setHtml('');
 		this._element.appendTo(this.renderTo);
 		this._element.removeAllClasses();
@@ -30,7 +31,7 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 		this._element.setMultiCss(
 		{
 			position:		'absolute',
-			display:		'none',
+			display:		this._visible ? this._displayMode : 'none',
 			overflow:		'hidden'
 		});
 		this._bodyDiv.setMultiCss(
@@ -61,6 +62,11 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 			bottom:		(!this.bottom && this.bottom!=0) ? 'auto' : this.bottom,
 			right:		(!this.right && this.right!=0) ? 'auto' : this.right
 		});
+	},
+	_renderChild:		function(child)
+	{
+		child.renderTo = this._bodyDiv;
+		child.show();
 	},
 	_renderTemplate:		function(bodyId)
 	{

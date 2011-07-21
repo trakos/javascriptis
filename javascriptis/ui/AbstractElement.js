@@ -34,7 +34,8 @@ jsis.ui.AbstractElement = jsis.$class(jsis.core.EventListener,
 	{
 		this._visible = true;
 		this.render();
-		this._element.setCss('display','block');
+		this._element.setCss('display',this._displayMode);
+		this.refresh();
 	},
 	hide:				function()
 	{
@@ -57,6 +58,7 @@ jsis.ui.AbstractElement = jsis.$class(jsis.core.EventListener,
 	contentHTML:			'',
 	_renderElements:		function()
 	{
+		this._element.recreate();
 		this._element.setHtml('');
 		this._element.appendTo(this.renderTo);
 		this._element.removeAllClasses();
@@ -67,6 +69,7 @@ jsis.ui.AbstractElement = jsis.$class(jsis.core.EventListener,
 	_id:					'',
 	_uiType:				"AbstractElement",
 	_visible:				false,
+	_displayMode:			'block',
 	_element:				null,
 	__elementName:			'div'
 });

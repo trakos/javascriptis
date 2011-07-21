@@ -2,8 +2,19 @@ jsis.ui.AbstractContainer = jsis.$class(jsis.ui.AbstractElement,
 {
 	$constructor:		function( content, renderTo )
 	{
-		this.content = content;
+		this.content = content || [];
+		var renderToObject = null;
+		if ( renderTo && renderTo.$jsis$ && renderTo.isAbstractContainer )
+		{
+			renderToObject = renderTo;
+			renderTo = null;
+		}
 		this.$super(renderTo);
+		if ( renderToObject ) 
+		{
+			renderToObject.content.push(this);
+			renderToObject.render();
+		}
 	},
 	render:			function(dontRecurse)
 	{
@@ -15,13 +26,13 @@ jsis.ui.AbstractContainer = jsis.$class(jsis.ui.AbstractElement,
 		this.refresh(false, true);
 		this._normalizeContent(this._getContent());
 		this._renderChildren(this._content);
-		this.fireEvent('rendered');
+		this._refreshChildren(this._content);
 	},
 	show:				function()
 	{
 		this._visible = true;
 		this.render();
-		this._element.setCss('display','block');
+		this._element.setCss('display',this._displayMode);
 		this.refresh();
 	},
 	refresh:			function(forceInvisible, dontRecurse)
@@ -56,7 +67,7 @@ jsis.ui.AbstractContainer = jsis.$class(jsis.ui.AbstractElement,
 	},
 	_renderChild:		function(child)
 	{
-		child.renderTo = this._bodyDiv;
+		child.renderTo = this._element;
 		child.show();
 	},
 	_refreshChild:		function(child, forceInvisible)
@@ -79,6 +90,7 @@ jsis.ui.AbstractContainer = jsis.$class(jsis.ui.AbstractElement,
 		}
 	},
 	content:			null,
+	isAbstractContainer:1,
 	_content:			null,
 	_uiType:			"AbstractContainer"
 });

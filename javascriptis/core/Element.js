@@ -1,9 +1,22 @@
+jsis.core.Element = {};
+// nasty trick to make this variable not trashing scope while being usable in jsis.core.Element below during intialization
+jsis.core.Element.defaultHandler = function(eventName,event)
+{
+	event = event[0];
+	var instance = jsis.instances.elements[jsis.$(this).data('jsisid')];
+	return instance.fireEvent(eventName, [instance, event]);
+}
 jsis.core.Element = jsis.$class(jsis.core.EventListener, 
 {
+	/**
+	 * Do not construct it by yourself - use jsis.find !
+	 * Constructing by yourself might break things e.g. destroy the previous instance if existing, making previous handlers behave improperly.
+	 */
 	$constructor:		function(domNode)
 	{
 		this.$super();
 		this.dom = domNode;
+		this.attachedEvents = {};
 		this.data = {};
 		var jsisid = jsis.$(domNode).data('jsisid');
 		if ( jsisid )
@@ -12,52 +25,29 @@ jsis.core.Element = jsis.$class(jsis.core.EventListener,
 			{
 				this[i] = jsis.instances.elements[jsisid][i];
 			}
+			this.recreate();
 		}
 		else
 		{
-			jsis.addElement(this);
-			jsisid = this.dom.id;
-			jsis.$(this.dom).data('jsisid', this.dom.id);
-			function mirrorEvent(eventName, that)
+			this.recreate();
+			for ( var eventName in this.$self.__eventsHandlers )
 			{
-				that._addEvent(eventName, function(instance, jsisEvent, eventName)
+				this._addEvent(eventName, function(instance, jsisEvent, eventName)
 				{
-					jsis.$(instance.dom).bind(eventName, function(event)
-					{
-						var instance = jsis.instances.elements[jsis.$(this).data('jsisid')];
-						return instance.fireEvent(eventName, [instance, event]);
-					});
+					instance.$self.__attachHandler(instance, eventName);
 				}, eventName);
 			}
-			var eventList = ['blur','change','click','dblclick','error','focus','focusin','focusout','hover','keydown','keypress','keyup','load','mousedown','mouseenter','mouseleave','mousemove','mouseout','mouseover','mouseup','ready','resize','scroll','select','submit','unload'];
-			for ( var i in eventList )
-			{
-				mirrorEvent(eventList[i], this);
-			}
-			jsis.instances.elements[jsisid] = this;
-			// adding rightclick and middleclick events:
-			this._addEvent("rightclick", function(instance, jsisEvent)
-			{
-				jsis.$(instance.dom).bind('contextmenu', function(event)
-				{
-					var instance = jsis.instances.elements[jsis.$(this).data('jsisid')];
-					return instance.fireEvent("rightclick", [instance, event]);
-				});
-			});
-			this._addEvent("middleclick", function(instance, jsisEvent)
-			{
-				jsis.$(instance.dom).mousedown(function(event)
-				{
-					if ( event.which == 2)
-					{
-						var instance = jsis.instances.elements[jsis.$(this).data('jsisid')];
-						return instance.fireEvent("middleclick", [instance, event]);
-					}
-				});
-			});
 		}
 	},
 	dom:			null,
+	recreate:		function()
+	{
+		jsis.addElement(this);
+		for ( var eventName in this.attachedEvents )
+		{
+			this.$self.__attachHandler(this, eventName);
+		}
+	},
 	addClass:		function(className)
 	{
 		jsis.$(this.dom).addClass(className);
@@ -283,18 +273,105 @@ jsis.core.Element = jsis.$class(jsis.core.EventListener,
 			return new jsis.core.Element(result.get(0));
 		}
 	},
-	appendTo:				function(targetEl)
+	appendTo:					function(targetEl)
 	{
+		targetEl = jsis.find(targetEl);
 		jsis.$(this.dom).appendTo("#"+targetEl.dom.id);
 	},
-	append:					function(appendMe)
+	append:						function(appendMe)
 	{
-		jsis.$(this.dom).append(appendMe);
+		appendMe = jsis.find(appendMe);
+		jsis.$(this.dom).append(appendMe.dom);
 	},
-	isVisible:				function()
+	isVisible:					function()
 	{
 		jsis.$(this.dom).is(":visible");
 	},
-	dom:					null,
-	data:					null
+	dom:						null,
+	data:						null,
+	attachedEvents:				null,
+},{
+	__attachHandler:			function(instance,eventName)
+	{
+		instance.attachedEvents[eventName] = 1;
+		var array = instance.__eventsWithExactMirror;
+		var handler, jqueryEventName;
+		if ( instance.$self.__eventsHandlers[eventName] )
+		{
+        	handler = instance.$self.__eventsHandlers[eventName];
+        	jqueryEventName = eventName;
+        	if ( handler.jquery )
+        	{
+        		jqueryEventName = handler.jquery;
+        		handler = handler.handler;
+        	}
+		}
+		else
+		{	
+			throw "event with name "+eventName+" unexpected!";
+		}
+		jsis.$(instance.dom).unbind(jqueryEventName, handler).bind(jqueryEventName, handler);
+	},
+	__eventsHandlers:
+	{
+		blur:				jsis.core.Element.defaultHandler,
+		change:				jsis.core.Element.defaultHandler,
+		click:				jsis.core.Element.defaultHandler,
+		dblclick:			jsis.core.Element.defaultHandler,
+		error:				jsis.core.Element.defaultHandler,
+		focus:				jsis.core.Element.defaultHandler,
+		focusin:			jsis.core.Element.defaultHandler,
+		focusout:			jsis.core.Element.defaultHandler,
+		hover:				jsis.core.Element.defaultHandler,
+		keydown:			jsis.core.Element.defaultHandler,
+		keypress:			jsis.core.Element.defaultHandler,
+		keyup:				jsis.core.Element.defaultHandler,
+		load:				jsis.core.Element.defaultHandler,
+		mousedown:			jsis.core.Element.defaultHandler,
+		mouseenter:			jsis.core.Element.defaultHandler,
+		mouseleave:			jsis.core.Element.defaultHandler,
+		mousemove:			jsis.core.Element.defaultHandler,
+		mouseout:			jsis.core.Element.defaultHandler,
+		mouseover:			jsis.core.Element.defaultHandler,
+		mouseup:			jsis.core.Element.defaultHandler,
+		ready:				jsis.core.Element.defaultHandler,
+		resize:				jsis.core.Element.defaultHandler,
+		scroll:				jsis.core.Element.defaultHandler,
+		select:				jsis.core.Element.defaultHandler,
+		submit:				jsis.core.Element.defaultHandler,
+		unload:				jsis.core.Element.defaultHandler,
+		rightclick:			
+		{
+			jquery:			'contextmenu',
+			handler:		function(eventName,event)
+			{
+					event = event[0];
+					var instance = jsis.instances.elements[jsis.$(this).data('jsisid')];
+					return instance.fireEvent("rightclick", [instance, event]);
+			}
+		},
+		middleclick:
+		{
+			jquery:			'click',
+			handler:		function(eventName,event)
+			{
+				event = event[0];
+				if ( event.which == 2)
+				{
+					var instance = jsis.instances.elements[jsis.$(this).data('jsisid')];
+					return instance.fireEvent("middleclick", [instance, event]);
+				}
+			}
+		}
+	}
 });
+
+// Don't ever tell anyone you saw that! No, just kidding, but seriously, it's quite a brute-hack to achieve it.
+// We have to delegate all those __eventsHandlers only once to make them constant between instances to make sure unbinding from jquery will work properly
+// and there are no better methods to delegate some argument to be saved in event.
+// An alternative would be to just write jsis.$delegate for each element of array above, but that would be more characters used even including this comment,
+// not to mention what would happen if anybody would want to change something ;)
+for ( var eventName in jsis.core.Element.__eventsHandlers )
+{
+	jsis.core.Element.__eventsHandlers[eventName] = jsis.$delegate(jsis.core.Element.__eventsHandlers[eventName], null, [eventName]);
+}

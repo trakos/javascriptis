@@ -1,24 +1,30 @@
 jsis.core.Event = jsis.$class(jsis.Base, 
 {
-	$constructor:		function(eventName, eventOwner, firstEventHandler, firstEventHandlerArguments)
+	$constructor:		function(eventName, eventOwner, firstEventHandler, firstEventHandlerArguments, eventChainType)
 	{
 		this._name = eventName;
 		this._owner = eventOwner;
 		this._firstHandler = firstEventHandler;
 		this._firstHandlerArguments = firstEventHandlerArguments;
+		this._eventChainType = eventChainType == undefined ? this.$self.CHAIN_IGNORE_UNDEFINED : eventChainType;
 		this.$setValues(
 		{
-			_handlers:				[],
-			_scopes:				[],
-			_options:				[]
+			_handlers:				{},
+			_scopes:				{},
+			_options:				{},
+			_arguments:				{}
 		});
 	},
 	// public
+	setEventChainType:	function(eventChainType)
+	{
+		this._eventChainType = eventChainType;
+	},
 	defaultOptions:
 	{
 		runOnce:		false
 	},
-	addListener:		function(eventHandler, eventScope, eventOptions)
+	addListener:		function(eventHandler, eventScope, eventArguments, eventOptions)
 	{
 		if ( !this._isInitialized )
 		{
@@ -30,50 +36,69 @@ jsis.core.Event = jsis.$class(jsis.Base,
 		{
 			mergedOptions[i] = (typeof eventOptions[i] != 'undefined')?eventOptions[i]:this.defaultOptions[i];
 		}
-		this._handlers.push(eventHandler);
-		this._scopes.push(eventScope);
-		this._options.push(eventOptions);
+		var id = jsis.uuid();
+		this._handlers[id] = eventHandler;
+		this._scopes[id] = eventScope;
+		this._arguments[id] = eventArguments;
+		this._options[id] = mergedOptions;
+		return id;
 	},
 	fire:				function(eventArguments)
 	{
 		var result = true;
-		for( var k=0; k < this._handlers.length; k++ )
+		for( var k in this._handlers )
 		{
 			var scope = this._scopes[k];
 			scope = scope || this._owner;
-			result = result && this._handlers[k].apply(scope, eventArguments);
+			var newargs = eventArguments;
+			if ( this._arguments[k] )
+			{
+				newargs = jsis.$clone1d(this._arguments[k]);
+				newargs.push( eventArguments );
+			}
+			var returnValue = this._handlers[k].apply(scope, newargs);
+			if ( this._eventChainType & this.$self.CHAIN_IGNORE_UNDEFINED ) returnValue = returnValue == undefined ? true : returnValue;
+			result = result && returnValue;
 			if(this._options[k] && this._options[k].runOnce)
 			{
-				this._handlers.splice(k,1);
-				this._scopes.splice(k,1);
-				this._options.splice(k,1);
-				k--;
+				delete this._handlers[k];
+				delete this._scopes[k];
+				delete this._arguments[k];
+				delete this._options[k];
 			}
+			if ( !result && this._eventChainType & this.$self.CHAIN_BREAK_ON_FIRST  ) break;
 		}
 		return result;
 	},
 	removeListener:		function(eventHandler)
 	{
-		var k = 0;
-		while( k < this._handlers.length )
+		for( var k in this._handlers )
 		{
 			if(eventHandler == this._handlers[k])
 			{
-				this._handlers.splice(k,1);
-				this._scopes.splice(k,1);
-				this._options.splice(k,1);
+				delete this._handlers[k];
+				delete this._scopes[k];
+				delete this._arguments[k];
+				delete this._options[k];
 			}
-			else
-			{
-				k++;
-			}
+		}
+	},
+	removeListenerById:	function(eventId)
+	{
+		if(this._handlers[eventId])
+		{
+			delete this._handlers[eventId];
+			delete this._scopes[eventId];
+			delete this._arguments[eventId];
+			delete this._options[eventId];
 		}
 	},
 	removeAllListeners:	function()
 	{
-		this._handlers = [];
-		this._scopes = [];
-		this._options = [];
+		this._handlers = {};
+		this._scopes = {};
+		this._arguments = {};
+		this._options = {};
 	},
 	// protected
 	_name:					false,
@@ -83,5 +108,19 @@ jsis.core.Event = jsis.$class(jsis.Base,
 	_isInitialized:			false,
 	_handlers:				null,
 	_scopes:				null,
-	_options:				null
+	_options:				null,
+	_arguments:				null,
+	/**
+	 * @see static variables for jsis.core.Event class
+	 */
+	_eventChainType:		null
+},{
+	/**
+	 * Don't break event execution chain on first false-return handler. It is off by default.
+	 */
+	CHAIN_BREAK_ON_FIRST:		1,
+	/**
+	 * Ignore undefined return values as true (prevents event handlers that don't return value from making it false). It is default.
+	 */
+	CHAIN_IGNORE_UNDEFINED:		2,
 });

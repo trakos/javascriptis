@@ -137,6 +137,7 @@ var jsis =
 			element.dom.id = 'jsis-'+this.uuid();
 		}
 		this.instances.elements[element.dom.id] = element;
+		$(element.dom).data('jsisid', element.dom.id);
 	},
 	uuid:				function()
 	{
@@ -214,8 +215,8 @@ var jsis =
 					wrapper:		$.template( null, '<div class="jsis-window-border-top"><div class="jsis-window-titlebar"></div></div><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}</div></div></div>'),
 					wrapperTitle:	$.template( null, '<div class="jsis-window-border-top">{{html title}}</div><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}</div></div></div>'),
 					title:			$.template( null, '<span class="jsis-window-titlebuttons jsis-window-titlebuttons-left">{{html leftButtons}}</span><span class="jsis-window-titlebuttons jsis-window-titlebuttons-right">{{html rightButtons}}</span><img src="{{html iconSrc}}" class="jsis-window-titleicon" /><span class="jsis-window-title">{{html title}}</span>'),
-					innerMargins:	[8,40], //w,h
-					outerMargins:	[2,2],
+					innerMargins:	[10,30], //w,h
+					outerMargins:	[0,0],
 					titleCls:		"jsis-window-titlebar",
 					bodyCls:		"jsis-window-body",
 					wrapCls:		"jsis-window-wrap"

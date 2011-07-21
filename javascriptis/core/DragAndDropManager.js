@@ -7,6 +7,7 @@ jsis.core.DragAndDropManager = jsis.$class(jsis.core.EventListener,
     		this._addMoveEvents();
     	}
     	this._currentlyListening++;
+    	return this;
     },
     _onMove:			function(el,e)
     {

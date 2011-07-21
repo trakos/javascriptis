@@ -2,26 +2,28 @@ jsis.utils.WindowManager = jsis.$class(jsis.core.EventListener,
 {
     $constructor:		function( element, baseZIndex )
     {
-		this._baseZIndex = baseZIndex ? baseZIndex : 
+		this._baseZIndex = baseZIndex ? baseZIndex : 400;
 		this._el = element;
 		this._windows = [];
     },
     addWindow:			function( uiWindow )
     {
     	this._addEvents(uiWindow);
-    	this._prependWindowToArray(uiWindow);
+    	this._appendWindowToArray(uiWindow);
     	this._updateZIndexes();
     },
+    /**
+     * WARNING: it does not clear events, so you cannot just move window to other manager ATM!
+     */
     removeWindow:		function( uiWindow )
     {
-    	// IT DOES NOT CLEAR EVENTS, SO YOU CANNOT JUST MOVE WINDOW TO THE OTHER MANAGER ON THE GO!
     	this._removeFromWindowArray(uiWindow.getId());
     	this._updateZIndexes();
     },
     bringWindowToFront:	function( uiWindow )
     {
     	this._removeFromWindowArray(uiWindow);
-    	this._prependWindowToArray(uiWindow);
+    	this._appendWindowToArray(uiWindow);
     	this._updateZIndexes();
     },
     _onWindowFocus:			function( uiWindow )
@@ -59,15 +61,15 @@ jsis.utils.WindowManager = jsis.$class(jsis.core.EventListener,
     		throw "ID "+id+" not found in windows!";
     	}
     },
-    _prependWindowToArray:	function( uiWindow )
+    _appendWindowToArray:	function( uiWindow )
     {
-    	this._windows.unshift(uiWindow);
+    	this._windows.push(uiWindow);
     },
     _updateZIndexes:	function()
     {
     	for ( var i in this._windows )
     	{
-    		this._windows[i].setZIndex(this._baseZIndex+i);
+    		this._windows[i].setZIndex(this._baseZIndex+parseInt(i));
     	}
     },
     _windows:			null,
