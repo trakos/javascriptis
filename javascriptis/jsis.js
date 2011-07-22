@@ -219,7 +219,8 @@ var jsis =
 					outerMargins:	[0,0],
 					titleCls:		"jsis-window-titlebar",
 					bodyCls:		"jsis-window-body",
-					wrapCls:		"jsis-window-wrap"
+					wrapCls:		"jsis-window-wrap",
+					focusCls:		"jsis-window-focus"
 				},
 				empty:
 				{

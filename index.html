@@ -172,7 +172,17 @@
 	 		win2.top = 50;
 	 		win2.left = 100;
 	 		win2.show();
-	 		console.log('win2 done');
+	 		var se7 = new jsis.ui.blocks.Standard(win2);
+	 		se7.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
+	 		se7.refresh();
+	 		
+	 		win2 = new jsis.ui.blocks.Window();
+	 		win2.title = "tytuł trzeciego okna";
+	 		win2.width = 400;
+	 		win2.height = 300;
+	 		win2.top = 50;
+	 		win2.left = 100;
+	 		win2.show();
 	 		var se7 = new jsis.ui.blocks.Standard(win2);
 	 		se7.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
 	 		se7.refresh();

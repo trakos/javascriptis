@@ -91,6 +91,16 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 	{
 		this._element.setCss("z-index",zIndex);
 	},
+	takeWindowFocus:	function()
+	{
+		this._element.removeClass("jsis-window-focused");
+		this.windowFocused = 0;
+	},
+	giveWindowFocus:	function()
+	{
+		this._element.addClass("jsis-window-focused");
+		this.windowFocused = 1;
+	},
 	_renderElements:		function()
 	{
 		this.$super();
@@ -173,6 +183,7 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 	_resizeHandlers:	[],
 	_uiType:			"blocks.Window",
 	_resizeDirection:	null,
+	windowFocused:		0,
 	handlersSize:		5,
 	minWidth:			15,
 	minHeight:			55

@@ -9,6 +9,7 @@ jsis.utils.WindowManager = jsis.$class(jsis.core.EventListener,
     addWindow:			function( uiWindow )
     {
     	this._addEvents(uiWindow);
+    	this._moveFocusTo(uiWindow);
     	this._appendWindowToArray(uiWindow);
     	this._updateZIndexes();
     },
@@ -23,6 +24,7 @@ jsis.utils.WindowManager = jsis.$class(jsis.core.EventListener,
     bringWindowToFront:	function( uiWindow )
     {
     	this._removeFromWindowArray(uiWindow);
+    	this._moveFocusTo(uiWindow);
     	this._appendWindowToArray(uiWindow);
     	this._updateZIndexes();
     },
@@ -38,6 +40,18 @@ jsis.utils.WindowManager = jsis.$class(jsis.core.EventListener,
     {
     	uiWindow.addListener("focus", this._onWindowFocus, this);
     	uiWindow.addListener("close", this._onWindowClose, this);
+    },
+    _moveFocusTo:			function( uiWindow )
+    {
+    	var id = uiWindow.getId();
+    	for ( var i in this._windows )
+    	{
+    		if ( this._windows[i].getId() != id && this._windows[i].windowFocused )
+    		{
+    			this._windows[i].takeWindowFocus();
+    		}
+    	}
+    	uiWindow.giveWindowFocus();
     },
     _removeFromWindowArray:	function( uiWindow )
     {
