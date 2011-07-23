@@ -12,7 +12,7 @@
 	
 	.jsis-window-titlebar
 	{
-		padding:		2px 5px 0 25px;
+		padding:		2px 5px 0 15px;
 		font-family:	verdana, sans-serif;
 		font-size:		13px;
 		position:		relative;
@@ -68,7 +68,7 @@
 				background-position: 0 38px;
 			}
 			
-			.jsis-window-titlebutton:active
+			.jsis-window-titlebutton.jsis-active
 			{
 				background-position: 0 19px;
 			}
@@ -83,7 +83,7 @@
 				background-position: 20px 38px;
 			}
 			
-			.jsis-window-titlebutton-red:active
+			.jsis-window-titlebutton-red.jsis-active
 			{
 				background-position: 20px 19px;
 			}

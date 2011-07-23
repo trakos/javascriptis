@@ -3,10 +3,12 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 	$constructor:			function( content, renderTo )
 	{
 		this.$super(content, renderTo);
-		this._titlebar = new jsis.ui.titlebar.Titlebar();
-		this.relayEvent(this._titlebar, 'titleClick');
-		this.relayEvent(this._titlebar, 'titleMouseUp');
-		this.relayEvent(this._titlebar, 'titleMouseDown');
+		this.titlebar = new jsis.ui.titlebar.Titlebar();
+		this.relayEvent(this.titlebar, 'titleClick', this);
+		this.relayEvent(this.titlebar, 'titleMouseUp', this);
+		this.relayEvent(this.titlebar, 'titleMouseDown', this);
+		this.relayEvent(this.titlebar, 'titleDoubleClick', this);
+		this.titlebar.addListener('titleButtonClick', this._onTitleButtonClick, this);
 	},
 	getInnerHeight:			function()
 	{
@@ -15,6 +17,10 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 	getInnerWidth:			function()
 	{
 		return this._bodyDiv.getWidth();
+	},
+	_onTitleButtonClick:	function(button, buttonId)
+	{
+		return this.fireEvent('titleButtonClick', [this, button, buttonId]);
 	},
 	_renderElements:		function()
 	{
@@ -77,10 +83,13 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 			jsis.$.tmpl( template, {body:"<div id='"+bodyId+"'></div>",title:"<div id='"+titleId+"'></div>"} ).appendTo( "#"+this._element.dom.id );
 			this._titleDiv = jsis.find("#"+titleId);
 			this._titleDiv.addClass(this._renderedStyle.titleCls);
-			this._titlebar.title = this.title;
-			this._titlebar.renderTo = this._titleDiv;
-			this._titlebar.template = this._renderedStyle.title;
-			this._titlebar.show();
+			this.titlebar.title = this.title;
+			this.titlebar.renderTo = this._titleDiv;
+			this.titlebar.template = this._renderedStyle.title;
+			this.titlebar.buttonTemplate = this._renderedStyle.buttonTitle;
+			this.titlebar.buttonCls = this._renderedStyle.buttonCls;
+			this.titlebar.redButtonCls = this._renderedStyle.redButtonCls;
+			this.titlebar.show();
 		}
 		else
 		{
@@ -93,7 +102,7 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 	computedHeight:			0,
 	minWidth:				0,
 	minHeight:				0,
-	_titlebar:				null,
+	titlebar:				null,
 	_currentStyle:			jsis.settings.defaultStyle,
 	_currentStyleVariant:	null,
 	_titleDiv:				null,

@@ -139,6 +139,13 @@ var jsis =
 		this.instances.elements[element.dom.id] = element;
 		$(element.dom).data('jsisid', element.dom.id);
 	},
+	removeElement:		function(element)
+	{
+		if ( element && element.dom && element.dom.id )
+		{
+			delete this.instances.elements[element.dom.id];
+		}
+	},
 	uuid:				function()
 	{
 		var S4 = function() {
@@ -199,6 +206,7 @@ var jsis =
 					if ( element.styleVariant ) return element.styleVariant;
 					if ( element._uiType == "blocks.Body" ) return "empty";
 					if ( element._uiType == "blocks.Window" ) return "window";
+					if ( element._uiType == "blocks.StandardWindow" ) return "window";
 					return "standard";
 				},
 				standard:
@@ -215,12 +223,15 @@ var jsis =
 					wrapper:		$.template( null, '<div class="jsis-window-border-top"><div class="jsis-window-titlebar"></div></div><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}</div></div></div>'),
 					wrapperTitle:	$.template( null, '<div class="jsis-window-border-top">{{html title}}</div><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}</div></div></div>'),
 					title:			$.template( null, '<span class="jsis-window-titlebuttons jsis-window-titlebuttons-left">{{html leftButtons}}</span><span class="jsis-window-titlebuttons jsis-window-titlebuttons-right">{{html rightButtons}}</span><img src="{{html iconSrc}}" class="jsis-window-titleicon" /><span class="jsis-window-title">{{html title}}</span>'),
+					buttonTitle:	$.template( null, '<span class="jsis-titlebutton-icon {{html iconClass}}"></span>'),
 					innerMargins:	[10,30], //w,h
 					outerMargins:	[0,0],
 					titleCls:		"jsis-window-titlebar",
+					buttonCls:		"jsis-window-titlebutton",
+					redButtonCls:	"jsis-window-titlebutton-red",
 					bodyCls:		"jsis-window-body",
 					wrapCls:		"jsis-window-wrap",
-					focusCls:		"jsis-window-focus"
+					focusCls:		"jsis-window-focus",
 				},
 				empty:
 				{

@@ -78,12 +78,24 @@ jsis.core.EventListener = jsis.$class(jsis.Base,
     	event.removeAllListeners();
     	return this;
     },
-    relayEvent:			function(from, eventName)
+    relayEvent:			function(from, eventName, prependArgument)
     {
-    	from.addListener(eventName, function()
+    	if ( prependArgument != undefined )
     	{
-    		return this.fireEvent(eventName, arguments);
-    	}, this);
+	    	from.addListener(eventName, function(firstArgument, arguments)
+	    	{
+	    		var newargs = Array.prototype.slice.call(arguments);
+	    		newargs.unshift(firstArgument);
+	    		return this.fireEvent(eventName, newargs);
+	    	}, this, [prependArgument]);
+    	}
+	    else
+	    {
+	    	from.addListener(eventName, function()
+	    	{
+	    		return this.fireEvent(eventName, arguments);
+	    	}, this);
+	    }
     	return this;
     },
     setEventChainType:	function(eventName,chainType)
@@ -107,6 +119,7 @@ jsis.core.EventListener = jsis.$class(jsis.Base,
      */
     _addEvent:			function(eventName, onFirstEventHandler, onFirstEventHandlerArgument, eventChainType)
     {
+    	eventName = eventName.toLowerCase();
     	onFirstEventHandler = onFirstEventHandler || jsis.EMPTYFN;
     	this._events[eventName] = new jsis.core.Event(eventName, this, onFirstEventHandler, onFirstEventHandlerArgument, eventChainType);
     },

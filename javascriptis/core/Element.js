@@ -42,6 +42,11 @@ jsis.core.Element = jsis.$class(jsis.core.EventListener,
 	dom:			null,
 	recreate:		function()
 	{
+		var dom = jsis.$('#'+this.dom.id).get(0);
+		if ( dom )
+		{
+			this.dom = dom;
+		}
 		jsis.addElement(this);
 		for ( var eventName in this.attachedEvents )
 		{
@@ -250,6 +255,11 @@ jsis.core.Element = jsis.$class(jsis.core.EventListener,
 			jumpToEnd = true;
 		}
 		jsis.$(this.dom).stop(clearQueue,jumpToEnd);
+		return this;
+	},
+	detach:				function()
+	{
+		jsis.$(this.dom).detach();
 		return this;
 	},
 	// functions not being just mirrors of jquery:

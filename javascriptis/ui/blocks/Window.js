@@ -4,7 +4,8 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 	{
 		this.left = this.top = 0;
 		this.$super(content,renderTo);
-		this._titlebar.addListener("titleMouseDown", function(titlebar,titleComponent,e)
+		this._resizeHandlers = [];
+		this.titlebar.addListener("titleMouseDown", function(titlebar,e)
 		{
 			e.preventDefault();
 			jsis.core.DragAndDropManager.get().start().addListener('move', this.move, this);
@@ -42,22 +43,25 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 	{
 		var x = args[0];
 		var y = args[1];
+		var moveX = 0;
+		var moveY = 0;
 		if ( direction == 'nw' )
 		{
-			this.move(x,y);
 			this.width-=x;
 			this.height-=y;
+			moveX = x;
+			moveY = y;
 		}
 		else if ( direction == 'n' )
 		{
-			this.move(0,y);
 			this.height-=y;
+			moveY = y;
 		}
 		else if ( direction == 'ne' )
 		{
-			this.move(0,y);
 			this.width+=x;
 			this.height-=y;
+			moveY = y;
 		}
 		else if ( direction == 'e' )
 		{
@@ -74,17 +78,26 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		}
 		else if ( direction == 'sw' )
 		{
-			this.move(x,0);
 			this.width-=x;
 			this.height+=y;
+			moveX = x;
 		}
 		else if ( direction == 'w' )
 		{
-			this.move(x,0);
 			this.width-=x;
+			moveX = x;
 		}
-		if ( this.width < this.minWidth ) this.width = this.minWidth;
-		if ( this.height < this.minHeight ) this.height = this.minHeight;
+		if ( this.width < this.minWidth )
+		{
+			this.width = this.minWidth;
+			moveX = 0;
+		}
+		if ( this.height < this.minHeight )
+		{
+			this.height = this.minHeight;
+			moveY = 0;
+		}
+		this.move(moveX,moveY);
 		this.refresh();
 	},
 	setZIndex:			function(zIndex)
@@ -101,7 +114,28 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		this._element.addClass("jsis-window-focused");
 		this.windowFocused = 1;
 	},
-	_renderElements:		function()
+	windowMaximize:		function()
+	{
+		this._widthBeforeMaximize = this.width;
+		this._heightBeforeMaximize = this.height;
+		this._leftBeforeMaximize = this.left;
+		this._topBeforeMaximize = this.top;
+		this.width = this.renderTo.getWidth();
+		this.height = this.renderTo.getHeight();
+		this.left = this.top = 0;
+		this.windowMaximized = true;
+		this.refresh();
+	},
+	windowRestore:		function()
+	{
+		this.width = this._widthBeforeMaximize;
+		this.height = this._heightBeforeMaximize;
+		this.left = this._leftBeforeMaximize;
+		this.top = this._topBeforeMaximize;
+		this.windowMaximized = false;
+		this.refresh();
+	},
+	_renderElements:	function()
 	{
 		this.$super();
 		var manager = jsis.utils.WindowManager.get(this.renderTo);
@@ -136,7 +170,6 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		var e = args[1];
 		e.preventDefault();
 		this._resizeDirection = resizeDirection;
-		var dd = jsis.core.DragAndDropManager.get();
 		jsis.core.DragAndDropManager.get().start().addListener('move', this.resize, this, [resizeDirection]);
 	},
 	_refreshElements:		function()
@@ -180,11 +213,16 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 	{
 		return this.fireEvent("titleClick", [this,titleComponent,e]);
 	},
-	_resizeHandlers:	[],
-	_uiType:			"blocks.Window",
-	_resizeDirection:	null,
-	windowFocused:		0,
-	handlersSize:		5,
-	minWidth:			15,
-	minHeight:			55
+	_resizeHandlers:		null,
+	_uiType:				"blocks.Window",
+	_resizeDirection:		null,
+	_widthBeforeMaximize:	100,
+	_heightBeforeMaximize:	100,
+	_leftBeforeMaximize:	0,
+	_rightBeforeMaximize:	0,
+	windowMaximized:		0,
+	windowFocused:			0,
+	handlersSize:			5,
+	minWidth:				15,
+	minHeight:				55
 });
