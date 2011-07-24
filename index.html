@@ -161,7 +161,6 @@
 	 		var buttonbar2 = new jsis.ui.buttonbar.Buttonbar();
 	 		buttonbar2.buttons = [ "OKEJKA" ];*/
 	 		var win = new jsis.ui.blocks.Window(se6);
-	 		win.title = "tytuł okna";
 	 		win.width = 400;
 	 		win.height = 300;
 	 		win.titlebar.leftButtons = [ jsis.ui.titlebar.Titlebar.PIN ];
@@ -176,6 +175,8 @@
 	 		win2.left = 100;
 	 		win2.titlebar.leftButtons = [ jsis.ui.titlebar.Titlebar.PIN, jsis.ui.titlebar.Titlebar.PLUS ];
 	 		win2.titlebar.rightButtons = [ jsis.ui.titlebar.Titlebar.ASK, jsis.ui.titlebar.Titlebar.UP ];
+	 		win2.buttonbar.rightButtons = [ "OK" ];
+	 		win2.windowResizeable = 0;
 	 		win2.show();
 	 		var se7 = new jsis.ui.blocks.Standard(win2);
 	 		//se7.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
@@ -187,9 +188,17 @@
 	 		win2.height = 300;
 	 		win2.top = 50;
 	 		win2.left = 100;
+	 		win2.buttonbar.leftButtons = [ jsis.ui.buttonbar.Buttonbar.HELP ];
+	 		win2.buttonbar.rightButtons = [ jsis.ui.buttonbar.Buttonbar.CANCEL, jsis.ui.buttonbar.Buttonbar.OK, "Dupa (blada)" ];
+	 		win2.addListener('buttonClick', function(window,buttonbar,text)
+	 		{
+		 		alert(text);
+	 		});
 	 		win2.show();
 	 		var se7 = new jsis.ui.blocks.Standard(win2);
-	 		//se7.styleVariant
+	 		se7.styleVariant = 'darker';
+	 		se7.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
+	 		win2.render();
 	 		///se7.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
 	 		//se7.refresh();
  		});

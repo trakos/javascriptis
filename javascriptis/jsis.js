@@ -218,15 +218,28 @@ var jsis =
 					bodyCls:		"jsis-body",
 					wrapCls:		"jsis-wrap"
 				},
+				darker:
+				{
+					wrapper:		$.template( null, '{{html body}}'),
+					wrapperTitle:	$.template( null, '<div class="jsis-titlebar">{{html title}}</div>{{html body}}'),
+					innerMargins:	[0,0], //w,h
+					outerMargins:	[0,0],
+					bodyCls:		"jsis-body-darker",
+					wrapCls:		"jsis-wrap-darker"
+				},
 				window:
 				{
-					wrapper:		$.template( null, '<div class="jsis-window-border-top"><div class="jsis-window-titlebar"></div></div><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}</div></div></div>'),
-					wrapperTitle:	$.template( null, '<div class="jsis-window-border-top">{{html title}}</div><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}</div></div></div>'),
+					wrapper:		$.template( null, '<div class="jsis-window-border-top-notitle"><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}{{html buttonbar}}</div></div></div></div>'),
+					wrapperTitle:	$.template( null, '<div class="jsis-window-border-top">{{html title}}</div><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}{{html buttonbar}}</div></div></div>'),
 					title:			$.template( null, '<span class="jsis-window-titlebuttons jsis-window-titlebuttons-left">{{html leftButtons}}</span><span class="jsis-window-titlebuttons jsis-window-titlebuttons-right">{{html rightButtons}}</span><img src="{{html iconSrc}}" class="jsis-window-titleicon" /><span class="jsis-window-title">{{html title}}</span>'),
 					buttonTitle:	$.template( null, '<span class="jsis-titlebutton-icon {{html iconClass}}"></span>'),
-					innerMargins:	[10,30], //w,h
+					buttonbar:		$.template( null, '<span class="jsis-buttonbar jsis-buttonbar-left">{{html leftButtons}}</span><span class="jsis-buttonbar jsis-buttonbar-right">{{html rightButtons}}</span>'),
+					innerMargins:	[10,10], //w,h
 					outerMargins:	[0,0],
+					titleMargins:	[0,19],
+					buttonbarMargins:[0,35],
 					titleCls:		"jsis-window-titlebar",
+					buttonbarCls:	"jsis-buttonbar",
 					buttonCls:		"jsis-window-titlebutton",
 					redButtonCls:	"jsis-window-titlebutton-red",
 					bodyCls:		"jsis-window-body",

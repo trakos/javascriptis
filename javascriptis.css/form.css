@@ -1,6 +1,33 @@
+
 	
+	.jsis-form-button
+	{
+		background:		url(images/button_bg.png) repeat-x top;
+		line-height:	12px;
+		height:			22px;
+		font-size:		11px;
+		padding:		2px 10px;
+		margin:			5px;
+		width:			100px;
+		text-align:		center;
+		cursor:			pointer;
+		color:			#333;
+		float:			right;
+		-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;
+		border:			1px solid #c0c1c3;
+	}
 	
+	.jsis-form-button:hover
+	{
+		background:		url(images/button_bg_hover.png) repeat-x;
+	}
 	
+	.jsis-form-button.jsis-active
+	{
+		background:		url(images/button_bg_active.png) repeat-x;
+		color:			#79a4cd;
+		border-color:	#dbdbde;
+	}	
 	
 	
 	.jsis-form-label

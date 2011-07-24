@@ -27,6 +27,7 @@ jsis.core.DragAndDropManager = jsis.$class(jsis.core.EventListener,
     {
     	jsis.find('body').addListener('mousemove', this._onMove, this);
     	jsis.find('body').addListener('mouseup', this._onUp, this);
+    	jsis.find('body').addListener('mouseleave', this._onUp, this);
     },
     _removeMoveEvents:		function()
     {
@@ -34,6 +35,7 @@ jsis.core.DragAndDropManager = jsis.$class(jsis.core.EventListener,
     	this._currentlyListening = 0;
     	jsis.find('body').removeListener('mousemove', this._onMove);
     	jsis.find('body').removeListener('mouseup', this._onUp);
+    	jsis.find('body').removeListener('mouseleave', this._onUp);
     	this.removeAllListeners('move');
     	this.removeAllListeners('drop');
     },

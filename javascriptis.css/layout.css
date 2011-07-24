@@ -12,7 +12,7 @@
 		border:			1px solid #bec4ca;
 	}
 	
-	.jsis-body, .jsis-body-darker, jsis-button-body
+	.jsis-body, .jsis-body-darker
 	{
 		margin:			0;
 		padding:		0;
@@ -27,6 +27,29 @@
 	{
 		background:		#e0e9f2;
 	}
+	
+	.jsis-buttonbar
+	{
+		background:		#f2f5f8;
+		height:			35px;
+		overflow:		hidden;
+	}
+	
+	.jsis-buttonbar-darker
+	{
+		background:		#e0e9f2;
+		height:			35px;
+	}
+		
+		.jsis-buttonbar-left
+		{
+			float:			left;
+		}
+		
+		.jsis-buttonbar-right
+		{
+			float:			right;
+		}
 	
 	.jsis-titlebar
 	{
@@ -148,32 +171,3 @@
 					{
 						background-position:	-60px -15px;
 					}
-	
-	.jsis-button-wrap
-	{
-		background:		url(images/button_bg.png) repeat-x top;
-		line-height:	12px;
-		height:			22px;
-		font-size:		11px;
-		padding:		2px 10px;
-		margin:			5px;
-		width:			100px;
-		text-align:		center;
-		cursor:			pointer;
-		color:			#333;
-		float:			right;
-		-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;
-		border:			1px solid #c0c1c3;
-	}
-	
-	.jsis-button-wrap:hover
-	{
-		background:		url(images/button_bg_hover.png) repeat-x;
-	}
-	
-	.jsis-button-wrap:active
-	{
-		background:		url(images/button_bg_active.png) repeat-x;
-		color:			#79a4cd;
-		border-color:	#dbdbde;
-	}

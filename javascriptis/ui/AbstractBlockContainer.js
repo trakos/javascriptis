@@ -2,12 +2,14 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 {
 	$constructor:			function( content, renderTo )
 	{
-		this.$super(content, renderTo);
 		this.titlebar = new jsis.ui.titlebar.Titlebar();
+		this.buttonbar = new jsis.ui.buttonbar.Buttonbar();
+		this.$super(content, renderTo);
 		this.relayEvent(this.titlebar, 'titleClick', this);
 		this.relayEvent(this.titlebar, 'titleMouseUp', this);
 		this.relayEvent(this.titlebar, 'titleMouseDown', this);
 		this.relayEvent(this.titlebar, 'titleDoubleClick', this);
+		this.relayEvent(this.buttonbar, 'buttonClick', this);
 		this.titlebar.addListener('titleButtonClick', this._onTitleButtonClick, this);
 	},
 	getInnerHeight:			function()
@@ -30,7 +32,7 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 		this._element.removeAllClasses();
 		var bodyId = 'jsis-'+jsis.uuid();
 		this._currentStyle = this.style ? this.style : jsis.settings.defaultStyle;
-		this._currentStyleVariant = jsis.settings.blockStyles[this._currentStyle].getVariantName(this);
+		this._currentStyleVariant = this.styleVariant ? this.styleVariant : jsis.settings.blockStyles[this._currentStyle].getVariantName(this);
 		this._renderedStyle = jsis.settings.blockStyles[this._currentStyle][this._currentStyleVariant];
 		this._renderTemplate(bodyId);
 		this._bodyDiv = jsis.find("#"+bodyId);
@@ -56,8 +58,8 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 		var height = this.computedHeight != null ? this.computedHeight : this.height;
 		this._bodyDiv.setMultiCss(
 		{
-			width:		width - this._renderedStyle.outerMargins[0] - this._renderedStyle.innerMargins[0],
-			height:		height - this._renderedStyle.outerMargins[1] - this._renderedStyle.innerMargins[1]
+			width:		width - this._renderedStyle.outerMargins[0] - this._renderedStyle.innerMargins[0] - ( this.titlebar.hasDataToShow() ? this._renderedStyle.titleMargins[0] : 0)  - ( this.buttonbar.hasDataToShow() ? this._renderedStyle.buttonbarMargins[0] : 0),
+			height:		height - this._renderedStyle.outerMargins[1] - this._renderedStyle.innerMargins[1] - ( this.titlebar.hasDataToShow() ? this._renderedStyle.titleMargins[1] : 0) - ( this.buttonbar.hasDataToShow() ? this._renderedStyle.buttonbarMargins[1] : 0)
 		});
 		this._element.setMultiCss(
 		{
@@ -76,14 +78,27 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 	},
 	_renderTemplate:		function(bodyId)
 	{
-		if ( this.title )
+		this.titlebar.title = this.title;
+		var buttonbarId;
+		var templateArguments = 
+		{
+			body:		"<div id='"+bodyId+"'></div>",
+			buttonbar:	"",
+			title:		""
+		};
+		if ( this.buttonbar.hasDataToShow() )
+		{
+			buttonbarId = 'jsis-'+jsis.uuid();
+			templateArguments.buttonbar = "<div id='"+buttonbarId+"'></div>";
+		}
+		if ( this.titlebar.hasDataToShow() )
 		{
 			var titleId = 'jsis-'+jsis.uuid();
 			var template = this._renderedStyle.wrapperTitle;
-			jsis.$.tmpl( template, {body:"<div id='"+bodyId+"'></div>",title:"<div id='"+titleId+"'></div>"} ).appendTo( "#"+this._element.dom.id );
+			templateArguments.title = "<div id='"+titleId+"'></div>";
+			jsis.$.tmpl( template, templateArguments ).appendTo( "#"+this._element.dom.id );
 			this._titleDiv = jsis.find("#"+titleId);
 			this._titleDiv.addClass(this._renderedStyle.titleCls);
-			this.titlebar.title = this.title;
 			this.titlebar.renderTo = this._titleDiv;
 			this.titlebar.template = this._renderedStyle.title;
 			this.titlebar.buttonTemplate = this._renderedStyle.buttonTitle;
@@ -94,7 +109,15 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 		else
 		{
 			var template = this._renderedStyle.wrapper;
-			jsis.$.tmpl( template, {body:"<div id='"+bodyId+"'></div>"} ).appendTo( "#"+this._element.dom.id );
+			jsis.$.tmpl( template, templateArguments ).appendTo( "#"+this._element.dom.id );
+		}
+		if ( this.buttonbar.hasDataToShow() )
+		{
+			this._buttonbarDiv = jsis.find("#"+buttonbarId);
+			this._buttonbarDiv.addClass(this._renderedStyle.buttonbarCls);
+			this.buttonbar.renderTo = this._buttonbarDiv;
+			this.buttonbar.template = this._renderedStyle.buttonbar;
+			this.buttonbar.show();
 		}
 	},
 	title:					"",
@@ -103,9 +126,12 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 	minWidth:				0,
 	minHeight:				0,
 	titlebar:				null,
+	style:					null,
+	styleVariant:			null,
 	_currentStyle:			jsis.settings.defaultStyle,
 	_currentStyleVariant:	null,
 	_titleDiv:				null,
+	_buttonbarDiv:			null,
 	_bodyDiv:				null,
 	_htmlDiv:				null,
 	_renderedStyle:			null,

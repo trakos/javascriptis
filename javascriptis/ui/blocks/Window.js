@@ -54,8 +54,17 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		}
 		else if ( direction == 'n' )
 		{
-			this.height-=y;
-			moveY = y;
+			if ( !this.titlebar.hasDataToShow() )
+			{
+				// in case of lack of titlebar, let north resize work as a move handler!
+				moveX = x;
+				moveY = y;
+			}
+			else
+			{
+				this.height-=y;
+				moveY = y;
+			}
 		}
 		else if ( direction == 'ne' )
 		{
@@ -164,6 +173,11 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 			});
 			this._resizeHandlers[i].addListener('mousedown', this._onResize, this, [i]);
 		}
+		if ( !this.titlebar.hasDataToShow() )
+		{
+			// in case of lack of titlebar, let north resize work as a move handler!
+			this._resizeHandlers['n'].setCss('cursor', 'move');
+		}
 	},
 	_onResize:				function(resizeDirection, args)
 	{
@@ -175,39 +189,50 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 	_refreshElements:		function()
 	{
 		this.$super();
-		var w = this._element.getWidth();
-		var h = this._element.getHeight();
-		for ( var i in {nw:0,ne:0,sw:0,se:0,n:0,w:0,n:0,e:0,s:0})
+		if ( this.windowResizeable )
 		{
-			this._resizeHandlers[i].setCss("z-index", parseInt(this._element.getCss("z-index"))+1);
+			var w = this._element.getWidth();
+			var h = this._element.getHeight();
+			for ( var i in {nw:0,ne:0,sw:0,se:0,n:0,w:0,n:0,e:0,s:0})
+			{
+				this._resizeHandlers[i].setCss("display", "block");
+				this._resizeHandlers[i].setCss("z-index", parseInt(this._element.getCss("z-index"))+1);
+			}
+			this._resizeHandlers['nw'].setCss("top", 0);
+			this._resizeHandlers['nw'].setCss("left", 0);
+			
+			this._resizeHandlers['ne'].setCss("top", 0);
+			this._resizeHandlers['ne'].setCss("right", 0);
+			
+			this._resizeHandlers['sw'].setCss("bottom", 0);
+			this._resizeHandlers['sw'].setCss("left", 0);
+			
+			this._resizeHandlers['se'].setCss("bottom", 0);
+			this._resizeHandlers['se'].setCss("right", 0);
+			
+			this._resizeHandlers['w'].setCss("top", this.handlersSize);
+			this._resizeHandlers['w'].setCss("left", 0);
+			this._resizeHandlers['w'].setHeight(h-2*this.handlersSize);
+			
+			this._resizeHandlers['n'].setCss("top", 0);
+			this._resizeHandlers['n'].setCss("left", this.handlersSize);
+			this._resizeHandlers['n'].setWidth(w-2*this.handlersSize);
+			
+			this._resizeHandlers['e'].setCss("top", this.handlersSize);
+			this._resizeHandlers['e'].setCss("right", 0);
+			this._resizeHandlers['e'].setHeight(h-2*this.handlersSize);
+			
+			this._resizeHandlers['s'].setCss("bottom", 0);
+			this._resizeHandlers['s'].setCss("left", this.handlersSize);
+			this._resizeHandlers['s'].setWidth(w-2*this.handlersSize);
 		}
-		this._resizeHandlers['nw'].setCss("top", 0);
-		this._resizeHandlers['nw'].setCss("left", 0);
-		
-		this._resizeHandlers['ne'].setCss("top", 0);
-		this._resizeHandlers['ne'].setCss("right", 0);
-		
-		this._resizeHandlers['sw'].setCss("bottom", 0);
-		this._resizeHandlers['sw'].setCss("left", 0);
-		
-		this._resizeHandlers['se'].setCss("bottom", 0);
-		this._resizeHandlers['se'].setCss("right", 0);
-		
-		this._resizeHandlers['w'].setCss("top", this.handlersSize);
-		this._resizeHandlers['w'].setCss("left", 0);
-		this._resizeHandlers['w'].setHeight(h-2*this.handlersSize);
-		
-		this._resizeHandlers['n'].setCss("top", 0);
-		this._resizeHandlers['n'].setCss("left", this.handlersSize);
-		this._resizeHandlers['n'].setWidth(w-2*this.handlersSize);
-		
-		this._resizeHandlers['e'].setCss("top", this.handlersSize);
-		this._resizeHandlers['e'].setCss("right", 0);
-		this._resizeHandlers['e'].setHeight(h-2*this.handlersSize);
-		
-		this._resizeHandlers['s'].setCss("bottom", 0);
-		this._resizeHandlers['s'].setCss("left", this.handlersSize);
-		this._resizeHandlers['s'].setWidth(w-2*this.handlersSize);
+		else
+		{
+			for ( var i in {nw:0,ne:0,sw:0,se:0,n:0,w:0,n:0,e:0,s:0})
+			{
+				this._resizeHandlers[i].setCss("display", "none");
+			}
+		}
 	},
 	_onTitleClick:			function(titleComponent,e)
 	{
@@ -220,9 +245,10 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 	_heightBeforeMaximize:	100,
 	_leftBeforeMaximize:	0,
 	_rightBeforeMaximize:	0,
+	windowResizeable:		1,
 	windowMaximized:		0,
 	windowFocused:			0,
 	handlersSize:			5,
 	minWidth:				15,
-	minHeight:				55
+	minHeight:				65
 });

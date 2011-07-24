@@ -12,6 +12,10 @@ jsis.ui.titlebar.Titlebar = jsis.$class(jsis.ui.AbstractElement,
 		this._element.addListener('mousedown', this._onTitleDown, this);
 		this._element.addListener('mouseup', this._onTitleUp, this);
 	},
+	hasDataToShow:			function()
+	{
+		return ( this.title ? true : false );
+	},
 	_refreshElements:		function()
 	{
 		this.$super();

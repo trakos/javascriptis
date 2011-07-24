@@ -93,6 +93,12 @@
 			line-height:	20px;
 		}
 		
+	.jsis-window-border-top-notitle
+	{
+		background:		url(images/window_border_bg.png) top repeat-x;
+		padding-top:	5px;
+	}
+		
 	.jsis-window-border-left
 	{
 		background:		url(images/window_border_bg.png) left repeat-y;
@@ -139,6 +145,11 @@
 		.jsis-window-focused .jsis-window-border-bottom
 		{
 			background:		url(images/window_border_bg_focus.png) bottom repeat-x;
+		}
+		
+		.jsis-window-focused .jsis-window-border-top-notitle
+		{
+			background:		url(images/window_border_bg_focus.png) top repeat-x;
 		}
 		
 		.jsis-window-focused .jsis-window-border-top

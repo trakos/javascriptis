@@ -10,6 +10,7 @@ jsis.ui.titlebar.Button = jsis.$class(jsis.ui.AbstractElement,
 		this._element.addListener('dblclick', this._onButtonDoubleClick, this);
 		this._element.addListener('mousedown', this._onButtonDown, this);
 		this._element.addListener('mouseup', this._onButtonUp, this);
+		this._element.addListener('mouseleave', this._onButtonMouseOut, this);
 	},
 	_renderElements:	function()
 	{
@@ -38,6 +39,10 @@ jsis.ui.titlebar.Button = jsis.$class(jsis.ui.AbstractElement,
 	_onButtonDoubleClick:	function(titleComponent,e)
 	{
 		return this.fireEvent("buttonDoubleClick", [this,titleComponent,e]);
+	},
+	_onButtonMouseOut:		function(titleComponent,e)
+	{
+		this._element.removeClass('jsis-active');
 	},
 	clsName:			'',
 	clsStyleName:		'',

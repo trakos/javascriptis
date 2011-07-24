@@ -1,30 +1,92 @@
-jsis.ui.buttonbar.Buttonbar = jsis.$class(jsis.ui.blocks.Vertical, 
+jsis.ui.buttonbar.Buttonbar = jsis.$class(jsis.ui.AbstractElement, 
 {
 	$constructor:		function()
 	{
 		this.$super();
-		this.layout = this.$self.LEFT;
+		this.height = 32;
+		this._leftButtonsWrap = jsis.find("<div />");
+		this._rightButtonsWrap = jsis.find("<div />");
+		this.leftButtons = [];
+		this.rightButtons = [];
 	},
-	_getContent:		function()
+	hasDataToShow:			function()
 	{
-		var content = [];
-		if ( this.layout == 'right' || this.layout == 'center' )
-			content.push(new jsis.ui.blocks.Empty());
-		for ( var i in this.buttons )
-		{
-			content.push(new jsis.ui.buttonbar.Button(this.buttons[i]));
-		}
-		if ( this.layout == 'left' || this.layout == 'center' )
-			content.push(new jsis.ui.blocks.Empty());
-		return content;
+		return this.leftButtons.length || this.rightButtons.length;
 	},
-	_uiType:			"buttonbar.Buttonbar",
-	layout:				null,
-	buttons:			[],
-	height:				20,
-	styleVariant:		"empty"
+	_refreshElements:		function()
+	{
+		this.$super();
+		this._leftButtonsWrap.setHtml('');
+		this._rightButtonsWrap.setHtml('');
+		for ( var i in this.leftButtons )
+		{
+			var button = this.leftButtons[i];
+			if ( typeof button == "string" )
+			{
+				button = new jsis.ui.form.Button();
+				button.buttonText = this.leftButtons[i];
+				button.addListener('buttonClick', this._onButtonClick, this, [button]);
+				this.leftButtons[i] = button;
+			}
+			button.renderTo = this._leftButtonsWrap;
+			button.show();
+		}
+		for ( var i in this.rightButtons )
+		{
+			var button = this.rightButtons[i];
+			if ( typeof button == "string" )
+			{
+				button = new jsis.ui.form.Button();
+				button.buttonText = this.rightButtons[i];
+				button.addListener('buttonClick', this._onButtonClick, this, [button]);
+				this.rightButtons[i] = button;
+			}
+			button.renderTo = this._rightButtonsWrap;
+			button.show();
+		}
+	},
+	_onButtonClick:			function(button, arguments)
+	{
+		return this.fireEvent('buttonClick', [button, button.buttonText]);
+	},
+	_renderElements:		function()
+	{
+		this.$super();
+		this._element.setCss("overflow", "hidden");
+		var templateVars = 
+		{
+				leftButtons:	"<div id="+this._leftButtonsWrap.dom.id+"></div>",
+				rightButtons:	"<div id="+this._rightButtonsWrap.dom.id+"></div>"
+		}
+		jsis.$.tmpl( this.template, templateVars ).appendTo( "#"+this._element.dom.id );
+		this._leftButtonsWrap.recreate();
+		this._rightButtonsWrap.recreate();
+	},
+	title:				'',
+	template:			jsis.emptyTpl,
+	iconSrc:			jsis.getEmptyImg(),
+	buttonCls:			'',
+	redButtonCls:		'',
+	buttonTemplate:		null,
+	/**
+	 * Classes for left buttons
+	 */
+	leftButtons:		null,
+	rightButtons:		null,
+	/**
+	 * Rendered left buttons
+	 */
+	_leftButtons:		null,
+	_rightButtons:		null,
+	_leftButtonsWrap:	null,
+	_rightButtonsWrap:	null,
+	_uiType:			"buttonbar.Buttonbar"
 },{
-	LEFT:		'left',
-	RIGHT:		'right',
-	CENTER:		'center'
+	OK:					"OK",
+	CANCEL:				"Cancel",
+	YES:				"Yes",
+	NO:					"No",
+	ACCEPT:				"Accept",
+	HELP:				"Help",
+	APPLY:				"Apply"
 });
