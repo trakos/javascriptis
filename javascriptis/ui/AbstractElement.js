@@ -3,7 +3,6 @@ jsis.ui.AbstractElement = jsis.$class(jsis.core.EventListener,
 	$constructor:		function( renderTo )
 	{
 		this.$super();
-		this._id = 'jsis-component-'+jsis.uuid();
 		this._element = jsis.find("<"+this.__elementName+" />");
 		if ( !renderTo )
 		{
@@ -44,7 +43,7 @@ jsis.ui.AbstractElement = jsis.$class(jsis.core.EventListener,
 	},
 	getId:					function()
 	{
-		return this._id;
+		return this._element.dom.id;
 	},
 	renderTo:				null,
 	width:					null,

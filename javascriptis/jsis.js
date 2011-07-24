@@ -197,7 +197,7 @@ var jsis =
 	settings:
 	{
 		defaultStyle:	'jsis',
-		blockStyles:
+		styles:
 		{
 			jsis:
 			{
@@ -209,51 +209,67 @@ var jsis =
 					if ( element._uiType == "blocks.StandardWindow" ) return "window";
 					return "standard";
 				},
-				standard:
+				formSettings:
 				{
-					wrapper:		$.template( null, '{{html body}}'),
-					wrapperTitle:	$.template( null, '<div class="jsis-titlebar">{{html title}}</div>{{html body}}'),
-					innerMargins:	[0,0], //w,h
-					outerMargins:	[0,0],
-					bodyCls:		"jsis-body",
-					wrapCls:		"jsis-wrap"
+					inputHeight:	25,
+					formRowPadding:	5,
 				},
-				darker:
+				blockVariants:
 				{
-					wrapper:		$.template( null, '{{html body}}'),
-					wrapperTitle:	$.template( null, '<div class="jsis-titlebar">{{html title}}</div>{{html body}}'),
-					innerMargins:	[0,0], //w,h
-					outerMargins:	[0,0],
-					bodyCls:		"jsis-body-darker",
-					wrapCls:		"jsis-wrap-darker"
-				},
-				window:
-				{
-					wrapper:		$.template( null, '<div class="jsis-window-border-top-notitle"><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}{{html buttonbar}}</div></div></div></div>'),
-					wrapperTitle:	$.template( null, '<div class="jsis-window-border-top">{{html title}}</div><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}{{html buttonbar}}</div></div></div>'),
-					title:			$.template( null, '<span class="jsis-window-titlebuttons jsis-window-titlebuttons-left">{{html leftButtons}}</span><span class="jsis-window-titlebuttons jsis-window-titlebuttons-right">{{html rightButtons}}</span><img src="{{html iconSrc}}" class="jsis-window-titleicon" /><span class="jsis-window-title">{{html title}}</span>'),
-					buttonTitle:	$.template( null, '<span class="jsis-titlebutton-icon {{html iconClass}}"></span>'),
-					buttonbar:		$.template( null, '<span class="jsis-buttonbar jsis-buttonbar-left">{{html leftButtons}}</span><span class="jsis-buttonbar jsis-buttonbar-right">{{html rightButtons}}</span>'),
-					innerMargins:	[10,10], //w,h
-					outerMargins:	[0,0],
-					titleMargins:	[0,19],
-					buttonbarMargins:[0,35],
-					titleCls:		"jsis-window-titlebar",
-					buttonbarCls:	"jsis-buttonbar",
-					buttonCls:		"jsis-window-titlebutton",
-					redButtonCls:	"jsis-window-titlebutton-red",
-					bodyCls:		"jsis-window-body",
-					wrapCls:		"jsis-window-wrap",
-					focusCls:		"jsis-window-focus",
-				},
-				empty:
-				{
-					wrapper:		$.template( null, '{{html body}}'),
-					wrapperTitle:	$.template( null, '{{html body}}'),
-					innerMargins:	[0,0], //w,h
-					outerMargins:	[0,0],
-					bodyCls:		"jsis-empty-body",
-					wrapCls:		"jsis-empty-wrap"
+					standard:
+					{
+						wrapper:		$.template( null, '{{html body}}{{html buttonbar}}'),
+						wrapperTitle:	$.template( null, '<div class="jsis-titlebar">{{html title}}</div>{{html body}}{{html buttonbar}}'),
+						buttonbar:		$.template( null, '<span class="jsis-buttonbar jsis-buttonbar-left">{{html leftButtons}}</span><span class="jsis-buttonbar jsis-buttonbar-right">{{html rightButtons}}</span><span class="jsis-buttonbar jsis-buttonbar-center">{{html centerButtons}}</span>'),
+						innerMargins:	[0,0], //w,h
+						outerMargins:	[0,0],
+						buttonbarMargins:[0,35],
+						bodyCls:		"jsis-body",
+						wrapCls:		"jsis-wrap",
+						childVariant:	"standard"
+					},
+					darker:
+					{
+						wrapper:		$.template( null, '{{html body}}{{html buttonbar}}'),
+						wrapperTitle:	$.template( null, '<div class="jsis-titlebar">{{html title}}</div>{{html body}}{{html buttonbar}}'),
+						buttonbar:		$.template( null, '<span class="jsis-buttonbar jsis-buttonbar-left">{{html leftButtons}}</span><span class="jsis-buttonbar jsis-buttonbar-right">{{html rightButtons}}</span><span class="jsis-buttonbar jsis-buttonbar-center">{{html centerButtons}}</span>'),
+						innerMargins:	[0,0], //w,h
+						outerMargins:	[0,0],
+						buttonbarMargins:[0,35],
+						bodyCls:		"jsis-body-darker",
+						wrapCls:		"jsis-wrap-darker",
+						childVariant:	"darker"
+					},
+					window:
+					{
+						wrapper:		$.template( null, '<div class="jsis-window-border-top-notitle"><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}{{html buttonbar}}</div></div></div></div>'),
+						wrapperTitle:	$.template( null, '<div class="jsis-window-border-top">{{html title}}</div><div class="jsis-window-border-bottom"><div class="jsis-window-border-left"><div class="jsis-window-border-right">{{html body}}{{html buttonbar}}</div></div></div>'),
+						title:			$.template( null, '<span class="jsis-window-titlebuttons jsis-window-titlebuttons-left">{{html leftButtons}}</span><span class="jsis-window-titlebuttons jsis-window-titlebuttons-right">{{html rightButtons}}</span><img src="{{html iconSrc}}" class="jsis-window-titleicon" /><span class="jsis-window-title">{{html title}}</span>'),
+						buttonTitle:	$.template( null, '<span class="jsis-titlebutton-icon {{html iconClass}}"></span>'),
+						buttonbar:		$.template( null, '<span class="jsis-buttonbar jsis-buttonbar-left">{{html leftButtons}}</span><span class="jsis-buttonbar jsis-buttonbar-right">{{html rightButtons}}</span><span class="jsis-buttonbar jsis-buttonbar-center">{{html centerButtons}}</span>'),
+						innerMargins:	[10,10], //w,h
+						outerMargins:	[0,0],
+						titleMargins:	[0,19],
+						buttonbarMargins:[0,35],
+						titleCls:		"jsis-window-titlebar",
+						buttonbarCls:	"jsis-buttonbar",
+						buttonCls:		"jsis-window-titlebutton",
+						redButtonCls:	"jsis-window-titlebutton-red",
+						bodyCls:		"jsis-window-body",
+						wrapCls:		"jsis-window-wrap",
+						focusCls:		"jsis-window-focus",
+						childVariant:	"standard"
+					},
+					empty:
+					{
+						wrapper:		$.template( null, '{{html body}}'),
+						wrapperTitle:	$.template( null, '{{html body}}'),
+						innerMargins:	[0,0], //w,h
+						outerMargins:	[0,0],
+						bodyCls:		"jsis-empty-body",
+						wrapCls:		"jsis-empty-wrap",
+						childVariant:	"empty"
+					}
 				}
 			}
 		}

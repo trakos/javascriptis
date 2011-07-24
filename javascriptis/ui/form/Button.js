@@ -1,4 +1,4 @@
-jsis.ui.form.Button  = jsis.$class(jsis.ui.AbstractElement,
+jsis.ui.form.Button  = jsis.$class(jsis.ui.form.Abstract,
 {
 	$constructor:		function()
 	{
@@ -14,8 +14,10 @@ jsis.ui.form.Button  = jsis.$class(jsis.ui.AbstractElement,
 	},
 	_refreshElements:		function()
 	{
+		this.$super();
 		this._element.setAttr('value', this.buttonText);
 		this._element.addClass("jsis-form-button");
+		this._element.setAttr("tabindex", this.tabIndex);
 	},
 	_onButtonClick:			function(titleComponent,e)
 	{
@@ -39,7 +41,7 @@ jsis.ui.form.Button  = jsis.$class(jsis.ui.AbstractElement,
 	{
 		this._element.removeClass('jsis-active');
 	},
+	tabIndex:			1,
 	buttonText:			'',
-	_uiType:			"form.Button",
-	__elementName:		"input"
+	_uiType:			"form.Button"
 });

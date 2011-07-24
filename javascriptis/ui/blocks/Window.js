@@ -37,7 +37,7 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		{
 			this.top += y;
 		}
-		this.refresh();
+		this.refresh(0,1);
 	},
 	resize:				function(direction, args)
 	{
@@ -107,7 +107,7 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 			moveY = 0;
 		}
 		this.move(moveX,moveY);
-		this.refresh();
+		this.refresh(0,1);
 	},
 	setZIndex:			function(zIndex)
 	{
@@ -133,7 +133,7 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		this.height = this.renderTo.getHeight();
 		this.left = this.top = 0;
 		this.windowMaximized = true;
-		this.refresh();
+		this.refresh(0,1);
 	},
 	windowRestore:		function()
 	{
@@ -142,7 +142,7 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		this.left = this._leftBeforeMaximize;
 		this.top = this._topBeforeMaximize;
 		this.windowMaximized = false;
-		this.refresh();
+		this.refresh(0,1);
 	},
 	_renderElements:	function()
 	{

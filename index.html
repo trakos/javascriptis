@@ -20,11 +20,12 @@
 	<script type="text/javascript" src="javascriptis/ui/AbstractZeroBlockContainer.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/AbstractSingleBlockContainer.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/AbstractMultiBlockContainer.js"></script>
-	<script type="text/javascript" src="javascriptis/ui/titlebar/Titlebar.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/titlebar/Button.js"></script>
-	<script type="text/javascript" src="javascriptis/ui/titlebar/Title.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/titlebar/Titlebar.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/Simple.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/blocks/Standard.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/blocks/Centered.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/Margin.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/blocks/Fit.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/blocks/Vertical.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/blocks/Horizontal.js"></script>
@@ -33,160 +34,57 @@
 	<script type="text/javascript" src="javascriptis/ui/blocks/Pane.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/blocks/Window.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/blocks/StandardWindow.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/FormRow.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/blocks/Form.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/form/Abstract.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/form/Button.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/form/Label.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/form/TextInput.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/form/PasswordInput.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/buttonbar/Buttonbar.js"></script>
-	<script type="text/javascript" src="javascriptis/ui/buttonbar/Button.js"></script>
 	<script type="text/javascript">
-		/*var Colt = jsis.$class(jsis.core.EventListener,
-		{
-			$constructor:		function()
-			{
-				this.$super();
-				this.addListener('pifpaf', function() 
-				{
-					alert('pifpaf1');
-				});
-				this.addListener('pifpaf', function() 
-				{
-					alert('pifpaf2');
-				});
-			}
-		});
-		var colt = new Colt();
-		colt.fireEvent('pifpaf');*/
- 		
- 		/*var Test = jsis.$class(jsis.Base, 
- 		{
- 	 		$constructor: function(x){this.bar = '1'+x;},
- 	 		foo: function(){console.log('Test'); return this.bar;}
- 		});
- 		var Test2 = jsis.$class(Test, 
- 		{
- 	 		$constructor: function(x){this.bar = '2'+x;},
- 	 		foo: function(){('Test2');return this.$super();}
- 		});
- 		var Test3 = jsis.$class(Test2, 
- 		{
- 	 		$constructor: function(x){this.$super(x);},
- 	 		foo: function(){console.log('Test3');return this.$super();}
- 		});
- 		var test = new Test3('z');
- 		test.bar = 's';
- 		console.log(test.foo());
- 		console.log(test.bar);*/
  		jsis.ready(function()
  		{
- 	 		/*el = jsis.find("<div />");
- 	 		el.setMultiCss({height:500,width:500,background:"#ccc"});
- 	 		el.appendTo("body");
- 	 		var el2 = jsis.find("<div />");
- 	 		el2.setMultiCss({height:200,width:200,background:"#aaa"});
- 	 		el2.addListener('click',function(){alert('1');});
- 	 		var id = el2.addListener('click',function(){alert('2');});
- 	 		el.append(el2);
- 	 		el.setHtml("");
- 	 		el.append(el2);
- 	 		el2.recreate();
- 	 		el2.recreate();
- 	 		el2.recreate();
- 	 		el2.recreate();
- 	 		jsis.find('#'+el2.dom.id).addListener('click',function(){alert('3');});
- 	 		el2.recreate();
- 	 		el2.recreate();
- 	 		el2.removeListenerById('click',id);
- 	 		
- 	 		return;*/
- 	 		/*el = jsis.find("body > div");
- 	 		el.addListener('click', function(e)
- 	 		{
- 	 	 		this.stopAnimation();
- 	 	 		this.animate({left:"+=50", top:"+=50",height:"+=50",width:"+=50"});
- 	 		});
- 	 		el.addListener('rightclick', function(e)
- 	 		{
- 	 	 		this.stopAnimation();
- 	 	 		this.animate({left:"-=50", top:"-=50",height:"-=50",width:"-=50"});
- 	 	 		return false;
- 	 		});
- 	 		el.addListener('middleclick', function(e)
-	 		{
- 	 	 		this.stopAnimation();
-	 	 		this.animate({left:"0", top:"0",height:"50",width:"50"});
-	 		});*/
-
-	 		var se1 = new jsis.ui.blocks.Standard();
-	 		se1.height = 0;
-	 		se1.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
-	 		var se2 = new jsis.ui.blocks.Standard();
-	 		se2.height = 0.2;
-	 		se2.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
-	 		var se3 = new jsis.ui.blocks.Standard();
-	 		se3.width = 0;
-	 		se3.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
-	 		var se4 = new jsis.ui.blocks.Standard();
-	 		se4.width = 100;
-	 		se4.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
-
-	 		var sv = new jsis.ui.blocks.Vertical([se3,se4]);
-
-	 		var sh = new jsis.ui.blocks.Horizontal([se1,sv,se2]);
-	 		sh.width = 800;
-	 		sh.height = 700;
-
-	 		var sc = new jsis.ui.blocks.Centered(sh);
-	 		sc.styleVariant = "empty";
-	 		sc.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
-	 		
-	 		/*var se5 = new jsis.ui.blocks.Standard();
-	 		se5.title = "tytuł piątego";
-	 		se5.contentHtml = "<p>pięć</p>";
-	 		
-	 		titlebar = new jsis.ui.titlebar.Titlebar();
-	 		titlebar.title = "Tytuł okna";
-	 		titlebar.buttons = [ titlebar.$self.X ];
-	 		buttonbar = new jsis.ui.buttonbar.Buttonbar();
-	 		buttonbar.buttons = [ "OKEJKA" ];
-	 		sp = new jsis.ui.blocks.Pane(se5,titlebar,buttonbar);
-	 		//sp.toolbartop = new jsis.ui.ToolbarContainer();
-	 		//sp.toolbarbottom = new jsis.ui.ToolbarContainer();
-			*/
-	 		var sb = new jsis.ui.blocks.Body(sc);
-	 		sb.show();
+ 	 		/*var simple = new jsis.ui.blocks.Standard();
+ 	 		simple.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
+	 		var sb = new jsis.ui.blocks.Body(simple);
+	 		sb.show();*/
 	 		
 	 		var se6 = new jsis.ui.blocks.Standard();
-	 		//se6.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
-	 		/*var titlebar2 = new jsis.ui.titlebar.Titlebar();
-	 		titlebar2.title = "Tytuł okna";
-	 		titlebar2.buttons = [ titlebar2.$self.X ];
-	 		var buttonbar2 = new jsis.ui.buttonbar.Buttonbar();
-	 		buttonbar2.buttons = [ "OKEJKA" ];*/
 	 		var win = new jsis.ui.blocks.Window(se6);
 	 		win.width = 400;
 	 		win.height = 300;
-	 		win.titlebar.leftButtons = [ jsis.ui.titlebar.Titlebar.PIN ];
-	 		win.titlebar.rightButtons = [ jsis.ui.titlebar.Titlebar.X ];
+	 		win.titlebar.leftButtons = [ jsis.ui.titlebar.Titlebar.PIN, jsis.ui.titlebar.Titlebar.PLUS ];
+	 		win.titlebar.rightButtons = [ jsis.ui.titlebar.Titlebar.ASK, jsis.ui.titlebar.Titlebar.UP ];
 	 		win.show();
 	 		
-	 		win2 = new jsis.ui.blocks.Window();
+	 		win2 = new jsis.ui.blocks.StandardWindow();
 	 		win2.title = "tytuł drugiego okna";
 	 		win2.width = 400;
-	 		win2.height = 300;
+	 		win2.height = 230;
 	 		win2.top = 50;
 	 		win2.left = 100;
-	 		win2.titlebar.leftButtons = [ jsis.ui.titlebar.Titlebar.PIN, jsis.ui.titlebar.Titlebar.PLUS ];
-	 		win2.titlebar.rightButtons = [ jsis.ui.titlebar.Titlebar.ASK, jsis.ui.titlebar.Titlebar.UP ];
-	 		win2.buttonbar.rightButtons = [ "OK" ];
 	 		win2.windowResizeable = 0;
+	 		
+	 		var login = new jsis.ui.form.TextInput();
+	 		login.labelText = "Login";
+	 		var password = new jsis.ui.form.PasswordInput();
+	 		password.labelText = "Hasło";
+	 		var form = new jsis.ui.blocks.Form([login,password]);
+	 		form.buttonbar.centerButtons = [ "Anuluj", "Zaloguj" ];
+	 		var ce = new jsis.ui.blocks.Margin(form, win2);
+	 		
 	 		win2.show();
-	 		var se7 = new jsis.ui.blocks.Standard(win2);
+
+	 		
 	 		//se7.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
-	 		se7.refresh();
+	 		//win2.render();
 	 		
 	 		win2 = new jsis.ui.blocks.StandardWindow();
 	 		win2.title = "tytuł trzeciego okna";
 	 		win2.width = 400;
 	 		win2.height = 300;
-	 		win2.top = 50;
+	 		win2.top = 500;
 	 		win2.left = 100;
 	 		win2.buttonbar.leftButtons = [ jsis.ui.buttonbar.Buttonbar.HELP ];
 	 		win2.buttonbar.rightButtons = [ jsis.ui.buttonbar.Buttonbar.CANCEL, jsis.ui.buttonbar.Buttonbar.OK, "Dupa (blada)" ];
@@ -199,8 +97,6 @@
 	 		se7.styleVariant = 'darker';
 	 		se7.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
 	 		win2.render();
-	 		///se7.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
-	 		//se7.refresh();
  		});
 	</script>
 </head>

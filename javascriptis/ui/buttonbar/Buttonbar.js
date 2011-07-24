@@ -5,13 +5,15 @@ jsis.ui.buttonbar.Buttonbar = jsis.$class(jsis.ui.AbstractElement,
 		this.$super();
 		this.height = 32;
 		this._leftButtonsWrap = jsis.find("<div />");
+		this._centerButtonsWrap = jsis.find("<div />");
 		this._rightButtonsWrap = jsis.find("<div />");
 		this.leftButtons = [];
+		this.centerButtons = [];
 		this.rightButtons = [];
 	},
 	hasDataToShow:			function()
 	{
-		return this.leftButtons.length || this.rightButtons.length;
+		return this.leftButtons.length || this.rightButtons.length|| this.centerButtons.length;
 	},
 	_refreshElements:		function()
 	{
@@ -31,7 +33,20 @@ jsis.ui.buttonbar.Buttonbar = jsis.$class(jsis.ui.AbstractElement,
 			button.renderTo = this._leftButtonsWrap;
 			button.show();
 		}
-		for ( var i in this.rightButtons )
+		for ( var i in this.centerButtons )
+		{
+			var button = this.centerButtons[i];
+			if ( typeof button == "string" )
+			{
+				button = new jsis.ui.form.Button();
+				button.buttonText = this.centerButtons[i];
+				button.addListener('buttonClick', this._onButtonClick, this, [button]);
+				this.centerButtons[i] = button;
+			}
+			button.renderTo = this._centerButtonsWrap;
+			button.show();
+		}
+		for ( var i = this.rightButtons.length-1; i>=0; i-- )
 		{
 			var button = this.rightButtons[i];
 			if ( typeof button == "string" )
@@ -56,10 +71,12 @@ jsis.ui.buttonbar.Buttonbar = jsis.$class(jsis.ui.AbstractElement,
 		var templateVars = 
 		{
 				leftButtons:	"<div id="+this._leftButtonsWrap.dom.id+"></div>",
+				centerButtons:	"<div id="+this._centerButtonsWrap.dom.id+"></div>",
 				rightButtons:	"<div id="+this._rightButtonsWrap.dom.id+"></div>"
 		}
 		jsis.$.tmpl( this.template, templateVars ).appendTo( "#"+this._element.dom.id );
 		this._leftButtonsWrap.recreate();
+		this._centerButtonsWrap.recreate();
 		this._rightButtonsWrap.recreate();
 	},
 	title:				'',
@@ -68,17 +85,11 @@ jsis.ui.buttonbar.Buttonbar = jsis.$class(jsis.ui.AbstractElement,
 	buttonCls:			'',
 	redButtonCls:		'',
 	buttonTemplate:		null,
-	/**
-	 * Classes for left buttons
-	 */
 	leftButtons:		null,
+	centerButtons:		null,
 	rightButtons:		null,
-	/**
-	 * Rendered left buttons
-	 */
-	_leftButtons:		null,
-	_rightButtons:		null,
 	_leftButtonsWrap:	null,
+	_centerButtonsWrap:	null,
 	_rightButtonsWrap:	null,
 	_uiType:			"buttonbar.Buttonbar"
 },{

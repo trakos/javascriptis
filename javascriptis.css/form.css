@@ -8,7 +8,7 @@
 		font-size:		11px;
 		padding:		2px 10px;
 		margin:			5px;
-		width:			100px;
+		min-width:		90px;
 		text-align:		center;
 		cursor:			pointer;
 		color:			#333;
@@ -34,9 +34,11 @@
 	{
 		font-family:	sans-serif;
 		font-size:		12px;
+		line-height:	23px;
+		float:			right;
 	}
 	
-	.jsis-form-field, .jsis-form-textarea
+	.jsis-form-text-input, .jsis-form-textarea
 	{
 		background:		url(images/form_field_bg.png) #fff repeat-x scroll;
 		border:			1px solid #c0c1c3;
@@ -48,12 +50,12 @@
 	}
 		
 	
-	.jsis-form-field:hover, .jsis-form-textarea:hover
+	.jsis-form-text-input:hover, .jsis-form-textarea:hover
 	{
 		border-color:	#dbdbde;
 	}
 	
-	.jsis-form-field:active, .jsis-form-field:focus, .jsis-form-textarea:active, .jsis-form-textarea:focus
+	.jsis-form-text-input:active, .jsis-form-text-input:focus, .jsis-form-textarea:active, .jsis-form-textarea:focus
 	{
 		border-color:	#dea4a4;
 	}

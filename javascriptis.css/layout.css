@@ -50,6 +50,17 @@
 		{
 			float:			right;
 		}
+		
+		.jsis-buttonbar-center
+		{
+			text-align:		center;
+		}
+			
+			.jsis-buttonbar-center .jsis-form-button
+			{
+				display:		inline !important;
+				float:			none;
+			}
 	
 	.jsis-titlebar
 	{
