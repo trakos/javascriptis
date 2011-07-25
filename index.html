@@ -54,11 +54,14 @@
 	 		var win = new jsis.ui.blocks.Window(se6);
 	 		win.width = 400;
 	 		win.height = 300;
+	 		win.top = 100;
+	 		win.left = 400;
 	 		win.titlebar.leftButtons = [ jsis.ui.titlebar.Titlebar.PIN, jsis.ui.titlebar.Titlebar.PLUS ];
 	 		win.titlebar.rightButtons = [ jsis.ui.titlebar.Titlebar.ASK, jsis.ui.titlebar.Titlebar.UP ];
 	 		win.show();
 	 		
-	 		win2 = new jsis.ui.blocks.StandardWindow();
+	 		win2 = new jsis.ui.blocks.Window();
+	 		win2.titlebar.rightButtons = [ jsis.ui.titlebar.Titlebar.X ];
 	 		win2.title = "tytuł drugiego okna";
 	 		win2.width = 400;
 	 		win2.height = 230;
@@ -97,6 +100,7 @@
 	 		se7.styleVariant = 'darker';
 	 		se7.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
 	 		win2.render();
+	 		win2.showLoadMask();
  		});
 	</script>
 </head>

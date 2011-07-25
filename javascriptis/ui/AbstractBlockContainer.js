@@ -20,6 +20,54 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 	{
 		return this._bodyDiv.getWidth();
 	},
+	showLoadMask:			function()
+	{
+		// WARNING! this is a weak attempt to implement it, as it uses subclasses of the current class, probably should reimplement it using html-only objects.
+		if ( !this.loadingMask )
+		{
+			this._loadingMaskInner = new jsis.ui.blocks.Standard();
+			this.loadingMask = new jsis.ui.blocks.Window(this._loadingMaskInner, this._bodyDiv);
+		}
+		this.mask();
+		this.refreshLoadMask();
+		this._loadingMaskCount++;
+	},
+	hideLoadMask:			function()
+	{
+		this._loadingMaskCount--;
+		if ( this._loadingMaskCount <= 0 )
+		{
+			this._loadingMaskCount = 0;
+			this._loadingMask.hide();
+			this.unmask();
+		}
+	},
+	refreshLoadMask:		function()
+	{
+		var templateArguments = 
+		{
+			resourcesPath:		jsis.resourcesUrl,
+			loadingText:		"Loading..."
+		};
+		var loaderHtml = jsis.$.tmpl( this._renderedBlockStyle.loadingMask, templateArguments ).html();
+		this._loadingMaskInner.contentHtml = loaderHtml;
+		this.loadingMask.windowResizeable = false;
+		this.loadingMask.height = 30;
+		this.loadingMask.width = 120;
+		this.loadingMask.left = (this.getInnerWidth() - this.loadingMask.width)/2;
+		this.loadingMask.top = (this.getInnerHeight() - this.loadingMask.height)/2;
+		this.loadingMask.show();
+	},
+	mask:					function()
+	{
+		this._bodyDiv.mask();
+		this.buttonbar.mask();
+	},
+	unmask:					function()
+	{
+		this._bodyDiv.unmask();
+		this.buttonbar.unmask();
+	},
 	_onTitleButtonClick:	function(button, buttonId)
 	{
 		return this.fireEvent('titleButtonClick', [this, button, buttonId]);
@@ -135,6 +183,9 @@ jsis.ui.AbstractBlockContainer = jsis.$class(jsis.ui.AbstractContainer,
 	titlebar:				null,
 	style:					null,
 	styleVariant:			null,
+	_loadingMaskCount:		0,
+	_loadingMask:			null,
+	_loadingMaskInner:		null,
 	_currentStyle:			jsis.settings.defaultStyle,
 	_currentStyleVariant:	null,
 	_titleDiv:				null,

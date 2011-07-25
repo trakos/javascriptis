@@ -247,6 +247,7 @@ var jsis =
 						title:			$.template( null, '<span class="jsis-window-titlebuttons jsis-window-titlebuttons-left">{{html leftButtons}}</span><span class="jsis-window-titlebuttons jsis-window-titlebuttons-right">{{html rightButtons}}</span><img src="{{html iconSrc}}" class="jsis-window-titleicon" /><span class="jsis-window-title">{{html title}}</span>'),
 						buttonTitle:	$.template( null, '<span class="jsis-titlebutton-icon {{html iconClass}}"></span>'),
 						buttonbar:		$.template( null, '<span class="jsis-buttonbar jsis-buttonbar-left">{{html leftButtons}}</span><span class="jsis-buttonbar jsis-buttonbar-right">{{html rightButtons}}</span><span class="jsis-buttonbar jsis-buttonbar-center">{{html centerButtons}}</span>'),
+						loadingMask:	$.template( null, '<div><img src="{{html resourcesPath}}/spinner_small.gif" /><span class="jsis-loading">{{html loadingText}}</span></div>' ),
 						innerMargins:	[10,10], //w,h
 						outerMargins:	[0,0],
 						titleMargins:	[0,19],

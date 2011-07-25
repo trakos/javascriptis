@@ -8,7 +8,10 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		this.titlebar.addListener("titleMouseDown", function(titlebar,e)
 		{
 			e.preventDefault();
+			this._overflowBeforeResize = this._bodyDiv.getCss('overflow');
+			this._bodyDiv.setCss('overflow','hidden');
 			jsis.core.DragAndDropManager.get().start().addListener('move', this.move, this);
+			jsis.core.DragAndDropManager.get().start().addListener('drop', this.endDrag, this);
 		}, this);
 	},
 	move:				function(x,y)
@@ -106,8 +109,15 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 			this.height = this.minHeight;
 			moveY = 0;
 		}
-		this.move(moveX,moveY);
-		this.refresh(0,1);
+		this.move(moveX,moveY); 
+		if ( this.windowResizeOnTheFly )
+		{
+			this.refresh();
+		}
+		else
+		{
+			this.refresh(0,1);
+		}
 	},
 	setZIndex:			function(zIndex)
 	{
@@ -133,7 +143,7 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		this.height = this.renderTo.getHeight();
 		this.left = this.top = 0;
 		this.windowMaximized = true;
-		this.refresh(0,1);
+		this.refresh();
 	},
 	windowRestore:		function()
 	{
@@ -142,7 +152,12 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		this.left = this._leftBeforeMaximize;
 		this.top = this._topBeforeMaximize;
 		this.windowMaximized = false;
-		this.refresh(0,1);
+		this.refresh();
+	},
+	endDrag:			function()
+	{
+		this._bodyDiv.setCss('overflow',this._overflowBeforeResize);
+		this.refresh();
 	},
 	_renderElements:	function()
 	{
@@ -184,7 +199,10 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		var e = args[1];
 		e.preventDefault();
 		this._resizeDirection = resizeDirection;
+		this._overflowBeforeResize = this._bodyDiv.getCss('overflow');
+		this._bodyDiv.setCss('overflow','hidden');
 		jsis.core.DragAndDropManager.get().start().addListener('move', this.resize, this, [resizeDirection]);
+		jsis.core.DragAndDropManager.get().start().addListener('drop', this.endDrag, this);
 	},
 	_refreshElements:		function()
 	{
@@ -245,6 +263,8 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 	_heightBeforeMaximize:	100,
 	_leftBeforeMaximize:	0,
 	_rightBeforeMaximize:	0,
+	_overflowBeforeResize:	'',
+	windowResizeOnTheFly:	0,
 	windowResizeable:		1,
 	windowMaximized:		0,
 	windowFocused:			0,

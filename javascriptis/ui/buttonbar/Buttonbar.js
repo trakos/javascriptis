@@ -15,6 +15,14 @@ jsis.ui.buttonbar.Buttonbar = jsis.$class(jsis.ui.AbstractElement,
 	{
 		return this.leftButtons.length || this.rightButtons.length|| this.centerButtons.length;
 	},
+	mask:					function()
+	{
+		this._element.mask();
+	},
+	unmask:					function()
+	{
+		this._element.unmask();
+	},
 	_refreshElements:		function()
 	{
 		this.$super();

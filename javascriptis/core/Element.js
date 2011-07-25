@@ -297,6 +297,39 @@ jsis.core.Element = jsis.$class(jsis.core.EventListener,
 	{
 		jsis.$(this.dom).is(":visible");
 	},
+	// other (complex) functions
+	mask:						function()
+	{
+		if ( !this.maskDiv )
+		{
+			this.maskDiv = jsis.find("<div />");
+		} 
+		else
+		{
+			this.maskDiv.recreate();
+			this.maskDiv.show();
+		}
+		this.maskDiv.setMultiCss(
+		{
+			height:		'100%',
+			width:		'100%',
+			position:	'absolute',
+			left:		0,
+			top:		0,
+			background:	"#cecece",
+			opacity:	0.8
+		});
+		this.append(this.maskDiv);
+	},
+	unmask:						function()
+	{
+		if ( this.maskDiv )
+		{
+			this.maskDiv.hide();
+		}
+	},
+	// variables
+	maskDiv:					null,
 	dom:						null,
 	data:						null,
 	attachedEvents:				null,
