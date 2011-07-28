@@ -87,6 +87,16 @@ jsis.core.Element = jsis.$class(jsis.core.EventListener,
 		return jsis.$(this.dom).attr(attributeName);
 		return this;
 	},
+	setValue:		function(value)
+	{
+		jsis.$(this.dom).val(value);
+		return this;
+	},
+	getValue:		function()
+	{
+		return jsis.$(this.dom).val();
+		return this;
+	},
 	getCss:			function(attributeName)
 	{
 		return jsis.$(this.dom).css(attributeName);

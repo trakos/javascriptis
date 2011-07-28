@@ -42,6 +42,7 @@
 	<script type="text/javascript" src="javascriptis/ui/form/TextInput.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/form/PasswordInput.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/buttonbar/Buttonbar.js"></script>
+	<script type="text/javascript" src="javascriptis/ui/dialog.js"></script>
 	<script type="text/javascript">
  		jsis.ready(function()
  		{
@@ -101,6 +102,11 @@
 	 		se7.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
 	 		win2.render();
 	 		win2.showLoadMask();
+
+	 		jsis.ui.dialog("Czy jesteś pewien?", "Czy na pewno chcesz to usunąć?", jsis.ui.dialog.CONFIRM, true, function(textid)
+	 		{
+		 		alert(textid);
+		 	});
  		});
 	</script>
 </head>

@@ -62,6 +62,13 @@
 				display:		inline !important;
 				float:			none;
 			}
+	
+	.jsis-dialog-text
+	{
+		font-size:		12px;
+		color:			#333;
+		font-family:	verdana, sans-serif;
+	}
 			
 	.jsis-loading
 	{

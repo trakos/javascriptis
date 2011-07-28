@@ -11,6 +11,14 @@ jsis.ui.form.TextInput  = jsis.$class(jsis.ui.form.Abstract,
 		this._element.addClass("jsis-form-text-input");
 		this._element.setAttr("tabindex", this.tabIndex);
 	},
+	getValue:				function()
+	{
+		return this._element.getValue();
+	},
+	setValue:				function(value)
+	{
+		this._element.setValue(value);
+	},
 	buttonText:			'',
 	tabIndex:			1,
 	_uiType:			"form.TextInput"

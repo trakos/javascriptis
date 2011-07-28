@@ -59,7 +59,7 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		{
 			if ( !this.titlebar.hasDataToShow() )
 			{
-				// in case of lack of titlebar, let north resize work as a move handler!
+				// in case of lack of titlebar, let north resize work as a move handler
 				moveX = x;
 				moveY = y;
 			}
@@ -153,6 +153,11 @@ jsis.ui.blocks.Window = jsis.$class(jsis.ui.blocks.Vertical,
 		this.top = this._topBeforeMaximize;
 		this.windowMaximized = false;
 		this.refresh();
+	},
+	windowClose:		function()
+	{
+		// @todo
+		this.hide();
 	},
 	endDrag:			function()
 	{
