@@ -21,6 +21,10 @@ var jsis =
 	{
 		return jsis.$.isArray(array);
 	},
+	$isObject:	function( value )
+	{
+		return value.constructor == Object;
+	},
 	$class:		function( $superClass, definition, statics )
 	{
 		definition = definition || {};
@@ -284,7 +288,10 @@ var jsis =
 	EMPTYFN:	function(){},
 	Base:		function(){},
 	core:		{},
-	data:		{},
+	data:		
+	{
+		json:		{}
+	},
 	ui:			
 	{
 		blocks:		{},

@@ -9,13 +9,13 @@ jsis.ui.dialog = function(title, content, buttons, closeable, handler, handlerSc
 	}
 	else if ( buttons && (buttons.leftButtons || buttons.rightButtons || buttons.rightButtons) )
 	{
-		leftButtons = buttons.leftButtons || [];
-		centerButtons = buttons.centerButtons || [];
-		rightButtons = buttons.rightButtons || [];
+		leftButtons = jsis.$clone1d(buttons.leftButtons) || [];
+		centerButtons = jsis.$clone1d(buttons.centerButtons) || [];
+		rightButtons = jsis.$clone1d(buttons.rightButtons) || [];
 	}
 	else
 	{
-		rightButtons = buttons;
+		rightButtons = jsis.$clone1d(buttons);
 	}
 	var dialogWindow = new jsis.ui.blocks.Window();
 	if ( closeable )
@@ -36,18 +36,18 @@ jsis.ui.dialog = function(title, content, buttons, closeable, handler, handlerSc
 		scope:			handlerScope,
 		arguments:		handlerArguments
 	};
-	dialogWindow.addListener('buttonClick', function(dialogWindow,buttonbar,text)
+	dialogWindow.addListener('buttonClick', function(win,buttonbar,text)
  	{
-		dialogWindow.windowClose();
+		win.windowClose();
 		jsis.$delegate(this.handler,this.scope,this.arguments)(text);
  	}, handlerData);
 	dialogWindow.addListener('titleButtonClick', function(win, button, buttonid)
 	{
 		// buttonid to na pewno x, bo tylko jego dodajemy
-		dialogWindow.windowClose();
+		win.windowClose();
 		jsis.$delegate(this.handler,this.scope,this.arguments)(false);
 	}, handlerData);
-	dialogWindow.dialogWindowResizeable = false;
+	dialogWindow.windowResizeable = false;
 	dialogWindow.height = 150;
 	dialogWindow.width = 500;
 	dialogWindow.show();
@@ -55,6 +55,7 @@ jsis.ui.dialog = function(title, content, buttons, closeable, handler, handlerSc
 	dialogWindow.left = ( jsis.$(window).width() - dialogWindow.width )/2;
 	dialogWindow.top = ( jsis.$(window).height() - dialogWindow.height )/2;
 	dialogWindow.refresh();
+	return dialogWindow;
 };
 jsis.ui.dialog.CONFIRM = 
 {

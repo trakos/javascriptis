@@ -8,12 +8,18 @@
 	<link rel="stylesheet" href="javascriptis.css/window.css" type="text/css" />
 	<script type="text/javascript" src="javascriptis.deps/jquery.js"></script>
 	<script type="text/javascript" src="javascriptis.deps/jquery.tmpl.js"></script>
+	<script type="text/javascript" src="javascriptis.deps/json2.js"></script>
 	<script type="text/javascript" src="javascriptis/jsis.js"></script>
 	<script type="text/javascript" src="javascriptis/core/Event.js"></script>
 	<script type="text/javascript" src="javascriptis/core/EventListener.js"></script>
 	<script type="text/javascript" src="javascriptis/core/Element.js"></script>
 	<script type="text/javascript" src="javascriptis/core/DragAndDropManager.js"></script>
 	<script type="text/javascript" src="javascriptis/utils/WindowManager.js"></script>
+	<script type="text/javascript" src="javascriptis/data/json/decode.js"></script>
+	<script type="text/javascript" src="javascriptis/data/json/encode.js"></script>
+	<script type="text/javascript" src="javascriptis/data/Ajax.js"></script>
+	<script type="text/javascript" src="javascriptis/data/ReliableAjax.js"></script>
+	<script type="text/javascript" src="javascriptis/data/WindowManager.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/AbstractElement.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/AbstractContainer.js"></script>
 	<script type="text/javascript" src="javascriptis/ui/AbstractBlockContainer.js"></script>
@@ -46,6 +52,29 @@
 	<script type="text/javascript">
  		jsis.ready(function()
  		{
+			var ajaxData = 
+			{
+				url:	'file:///K:/home/virtualbox/workspaces/yae/javascriptis/variousTests.html',
+				data:
+				{
+					costam:		{ x:5, y:7 },
+					inne:		[ 1, 67, 'hehe', 20 ],
+					wiecej:		
+					{
+						jeszcze:	[ 5, { hehe: 32 } ]
+					}
+				}
+			};
+			var ajax = new jsis.data.ReliableAjax(ajaxData);
+			ajax.addListener('complete', function(ajax,isSuccess,textStatus,errorThrown,data)
+			{
+				alert(textStatus);
+				alert(errorThrown);
+				alert(data);
+			});
+			ajax.perform();
+
+ 	 		
  	 		/*var simple = new jsis.ui.blocks.Standard();
  	 		simple.contentHtml = "<img style='width:100%; height:100%;' src='http://s2.trakos.pl/test.jpg' />";
 	 		var sb = new jsis.ui.blocks.Body(simple);
