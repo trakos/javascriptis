@@ -1,9 +1,10 @@
 jsis.data.ReliableAjax = jsis.$class(jsis.data.Ajax, 
 {
-	_error:			function(textStatus,errorThrown)
+	retryQuestionString:"Connection error - couldn't fetch data from server.<br /><br />Do you want to retry?",
+	_error:				function(textStatus,errorThrown)
 	{
 		this._active = false;
-		jsis.ui.dialog(null, "Błąd połączenia - nie udało się uzyskać danych z serwera. Czy chcesz ponowić próbę?", jsis.ui.dialog.YESNO, true, function(textid)
+		jsis.ui.dialog(null, this.retryQuestionString, jsis.ui.dialog.YESNO, true, function(textid)
 		{
 	 		if ( textid == jsis.ui.buttonbar.Buttonbar.YES )
 	 		{

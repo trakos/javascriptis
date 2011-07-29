@@ -43,7 +43,7 @@ jsis.ui.dialog = function(title, content, buttons, closeable, handler, handlerSc
  	}, handlerData);
 	dialogWindow.addListener('titleButtonClick', function(win, button, buttonid)
 	{
-		// buttonid to na pewno x, bo tylko jego dodajemy
+		// buttonid must be 'x', because it is the only one added
 		win.windowClose();
 		jsis.$delegate(this.handler,this.scope,this.arguments)(false);
 	}, handlerData);
