@@ -1,0 +1,1199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" dir="ltr">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
+<title>jsis view</title>
+<style type="text/css">
+	body
+	{
+		margin:			0;
+		padding:		0;
+		height:			100%;
+	}
+	
+	.jsis-wrap, .jsis-wrap-darker, jsis-button-wrap
+	{
+		background:		#efefef;
+		margin:			0;
+		padding:		0;
+	}
+	
+	.jsis-wrap-border, .jsis-wrap-darker-border
+	{
+		border:			1px solid #bec4ca;
+	}
+	
+	.jsis-body, .jsis-body-darker, jsis-button-body
+	{
+		margin:			0;
+		padding:		0;
+	}
+	
+	.jsis-wrap, .jsis-window-body
+	{
+		background:		#f2f5f8;
+	}
+	
+	.jsis-wrap-darker
+	{
+		background:		#e0e9f2;
+	}
+	
+	.jsis-titlebar
+	{
+		height:			21px;
+		line-height:	18px;
+		padding:		2px 0 2px 5px;
+		font-weight:	bold;
+		font-size:		12px;
+		color:			#6699cc;
+		font-family:	verdana, sans-serif;
+		background:		url(images/header_bg.png) #e3e3e3 repeat-x top;
+	}
+	
+		.jsis-titlebuttons-left
+		{
+			float:			left;
+		}
+		
+		.jsis-titlebuttons-right
+		{
+			float:			right;
+		}
+		
+		.jsis-titlebuttons
+		{
+			padding:		0 5px;
+		}
+		
+			.jsis-titlebutton
+			{
+				width:			14px;
+				height:			15px;
+				background:		url(images/buttons_pane.png);
+				display:		block;
+				float:			left;
+				padding:		1.5px 1px;
+				margin:			0 1px;
+			}	
+		
+			.jsis-titlebutton:hover
+			{
+				background-position: 0 -18px;
+			}
+		
+			.jsis-titlebutton:active
+			{
+				background-position: 0 -36px;
+			}
+		
+			.jsis-titlebutton-red
+			{
+				background-position:-17px 0;
+			}
+		
+			.jsis-titlebutton-red:hover
+			{
+				background-position: -17px -18px;
+			}
+		
+			.jsis-titlebutton-red:active
+			{
+				background-position: -17px -36px;
+			}
+	
+				.jsis-titlebutton-icon
+				{
+					background:		url(images/buttons_icons.png);
+					height:			15px;
+					width:			15px;
+					display:		block;
+				}
+					
+					.jsis-titlebutton-icon-unpin
+					{
+						background-position:	0px 0px;
+					}
+					
+					.jsis-titlebutton-icon-pin
+					{
+						background-position:	-15px 0px;
+					}
+					
+					.jsis-titlebutton-icon-up
+					{
+						background-position:	-30px 0px;
+					}
+					
+					.jsis-titlebutton-icon-down
+					{
+						background-position:	-45px 0px;
+					}
+					
+					.jsis-titlebutton-icon-plus
+					{
+						background-position:	-60px 0px;
+					}
+					
+					.jsis-titlebutton-icon-ask
+					{
+						background-position:	0px -15px;
+					}
+				
+					.jsis-titlebutton-icon-min
+					{
+						background-position:	-15px -15px;
+					}
+				
+					.jsis-titlebutton-icon-restore
+					{
+						background-position:	-30px -15px;
+					}
+				
+					.jsis-titlebutton-icon-max
+					{
+						background-position:	-45px -15px;
+					}
+				
+					.jsis-titlebutton-icon-x
+					{
+						background-position:	-60px -15px;
+					}
+	
+	.jsis-button-wrap
+	{
+		background:		url(images/button_bg.png) repeat-x top;
+		line-height:	12px;
+		height:			22px;
+		font-size:		11px;
+		padding:		2px 10px;
+		margin:			5px;
+		width:			100px;
+		text-align:		center;
+		cursor:			pointer;
+		color:			#333;
+		float:			right;
+		-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;
+		border:			1px solid #c0c1c3;
+	}
+	
+	.jsis-button-wrap:hover
+	{
+		background:		url(images/button_bg_hover.png) repeat-x;
+	}
+	
+	.jsis-button-wrap:active
+	{
+		background:		url(images/button_bg_active.png) repeat-x;
+		color:			#79a4cd;
+		border-color:	#dbdbde;
+	}
+	
+	.jsis-window-border-top
+	{
+		margin:			0;
+		padding:		0;
+		background:		url(images/window_border_bg.png);
+		width:			100%;
+		height:			24px;
+		-webkit-border-radius: 8px 8px 0px 0px;-moz-border-radius: 8px 8px 0px 0px;border-radius: 8px 8px 0px 0px;
+	}
+	
+	.jsis-window-titlebar
+	{
+		padding:		2px 5px 0 20px;
+		font-family:	verdana, sans-serif;
+		font-size:		11px;
+		position:		relative;
+	}
+	
+		.jsis-window-body
+		{
+			position:		relative;
+		}
+	
+		.jsis-window-titleicon
+		{
+			position:		absolute;
+			top:			4px;
+			left:			5px;
+			width:			16px;
+			height:			16px;			
+		}
+		
+		.jsis-window-titlebuttons-left
+		{
+			float:			left;
+		}
+		
+		.jsis-window-titlebuttons-right
+		{
+			float:			right;
+		}
+		
+		.jsis-window-titlebuttons
+		{
+			padding:		0 5px;
+		}
+		
+			.jsis-window-titlebutton
+			{
+				width:			14px;
+				height:			15px;
+				background:		url(images/buttons_window.png);
+				display:		block;
+				float:			left;
+				margin:			0 1px;
+				padding:		2px 3px;
+			}
+			
+			.jsis-window-titlebutton:hover
+			{
+				background-position: 0 38px;
+			}
+			
+			.jsis-window-titlebutton:active
+			{
+				background-position: 0 19px;
+			}
+			
+			.jsis-window-titlebutton-red
+			{
+				background-position: 20px 0;
+			}
+			
+			.jsis-window-titlebutton-red:hover
+			{
+				background-position: 20px 38px;
+			}
+			
+			.jsis-window-titlebutton-red:active
+			{
+				background-position: 20px 19px;
+			}
+		
+		.jsis-window-titlebar .jsis-window-title
+		{
+			line-height:	20px;
+		}
+		
+	.jsis-window-border-left
+	{
+		background:		url(images/window_border_bg.png) left repeat-y;
+		padding-left:	5px;
+	}
+	
+	.jsis-window-border-right
+	{
+		background:		url(images/window_border_bg.png) right repeat-y;
+		padding-right:	5px;
+	}
+	
+	.jsis-window-border-bottom
+	{
+		background:		url(images/window_border_bg.png) bottom repeat-x;
+		padding-bottom:	5px;
+		-webkit-border-radius: 0px 0px 4px 4px;-moz-border-radius: 0px 0px 4px 4px;border-radius: 0px 0px 4px 4px;
+	}
+	
+	.jsis-window-body
+	{
+		margin:			0;
+		padding:		0;
+	}
+	
+	.jsis-form-label
+	{
+		font-family:	sans-serif;
+		font-size:		12px;
+	}
+	
+	.jsis-form-field, .jsis-form-textarea
+	{
+		background:		url(images/form_field_bg.png) #fff repeat-x scroll;
+		border:			1px solid #c0c1c3;
+		font-family:	sans-serif;
+		font-size:		12px;
+		padding:		3px 2px;
+		resize:			none;
+		color:			#535353;
+	}
+		
+	
+	.jsis-form-field:hover, .jsis-form-textarea:hover
+	{
+		border-color:	#dbdbde;
+	}
+	
+	.jsis-form-field:active, .jsis-form-field:focus, .jsis-form-textarea:active, .jsis-form-textarea:focus
+	{
+		border-color:	#dea4a4;
+	}
+	
+		.jsis-form-radio
+		{
+			height:			13px;
+			width:			13px;
+			background:		url(images/form_radio.png);
+			border:			none;
+			padding:		0;
+			vertical-align:	-4px;
+			margin:			5px 5px -5px 0;
+		}
+		
+		.jsis-form-radio-checked
+		{
+			background-position: 0 -13px;
+		}
+		
+		.jsis-form-radio-container:hover .jsis-form-radio
+		{
+			background-position: -13px 0;
+		}
+		
+		.jsis-form-radio-container:hover .jsis-form-radio-checked
+		{
+			background-position: -13px -13px;
+		}
+		
+		.jsis-form-radio-container:active .jsis-form-radio
+		{
+			background-position: 0 -26px;
+		}
+	
+		.jsis-form-checkbox
+		{
+			height:			13px;
+			width:			13px;
+			background:		url(images/form_checkbox.png);
+			border:			none;
+			padding:		0;
+			vertical-align:	-4px;
+			margin:			5px 5px -5px 0;
+		}
+		
+		.jsis-form-checkbox-checked
+		{
+			background-position: 0 -13px;
+		}
+		
+		.jsis-form-checkbox-container:hover .jsis-form-checkbox
+		{
+			background-position: -13px 0;
+		}
+		
+		.jsis-form-checkbox-container:hover .jsis-form-checkbox-checked
+		{
+			background-position: -13px -13px;
+		}
+		
+		.jsis-form-checkbox-container:active .jsis-form-checkbox
+		{
+			background-position: 0 -26px;
+		}
+		
+	.jsis-toolbar
+	{
+		height:			22px;
+		border-bottom:	1px solid #e0e9f2;
+		background:		#f7f8f8;
+	}
+	
+		.jsis-toolbar-left .jsis-toolbar-button
+		{
+			float:				left;
+		}
+	
+		.jsis-toolbar-right .jsis-toolbar-button
+		{
+			float:				right;
+		}
+	
+		.jsis-toolbar-button
+		{
+			color:			#535353;
+			font-family:	sans-serif;
+			font-size:		13px;
+			line-height:	14px;
+			height:			14px;
+			padding:		3px 6px;
+			margin:			2px 5px;
+			cursor:			pointer;
+			-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;
+		}
+	
+		.jsis-toolbar-button:hover
+		{
+			background:		url(images/menu_bg_hover.png) #a4bacf repeat-x top;
+			border:			1px solid #cfcfcf;
+			padding:		2px 5px;
+		}
+	
+		.jsis-toolbar-button:active, .jsis-toolbar-button-clicked
+		{
+			background:		url(images/menu_bg_active.png) #7899b7 repeat-x top left;
+			border:			1px solid #cfcfcf;
+			padding:		2px 5px;
+		}
+		
+		.jsis-toolbar-menubutton-trigger, .jsis-toolbar-menu-position-trigger
+		{
+			background:		url(images/arrows.png) no-repeat;
+			height:			5px;
+			width:			5px;
+			padding-left:	5px;
+			margin-left:	10px;
+		}
+		
+		.jsis-toolbar-menu-position-trigger
+		{
+			background-position:	-15px 0;
+			float:					right;
+			margin-top:				7px;
+		}
+		
+		.jsis-toolbar-menubutton-trigger
+		{
+			vertical-align:	-5px;
+		}
+		
+		.jsis-toolbar-menu
+		{
+			background:		#f7f8f8;
+			border:			1px solid #e0e9f2;
+		}
+		
+			.jsis-toolbar-menu-position
+			{
+				border-bottom:		1px solid #e0e9f2;
+				font-size:			12px;
+				font-family:		sans-serif;
+				line-height:		19px;
+				padding:			0 5px;
+				height:				19px;
+				cursor:				pointer;
+				color:				#535353;
+			}
+			
+			.jsis-toolbar-menu-position-last
+			{
+				border:				none;
+				line-height:		19px;
+			}
+		
+			.jsis-toolbar-menu-position:hover
+			{
+				background:		url(images/menu_bg_hover.png) #a4bacf repeat-x top;
+			}
+	
+			.jsis-toolbar-menu-position:active
+			{
+				background:		url(images/menu_bg_active.png) #7899b7 repeat-x top left;
+			}
+			
+		.jsis-form-field-trigger
+		{
+			background:		url(images/form_triggers.png);
+			width:			20px;
+			height:			23px;
+			float:			right;
+			cursor:			pointer;
+		}
+			
+		.jsis-form-field-trigger-combobox:hover
+		{
+			background-position:	-20px 0;
+		}
+			
+		.jsis-form-field-trigger-combobox:active, .jsis-form-field-trigger-combobox-active
+		{
+			background-position:	-40px 0;
+		}
+		
+		.jsis-form-field-trigger-date
+		{
+			background-position:	0 -22px;
+		}
+		
+		.jsis-form-field-trigger-date:hover
+		{
+			background-position:	-20px -22px;
+		}
+		
+		.jsis-form-field-trigger-date:active, .jsis-form-field-trigger-date-active
+		{
+			background-position:	-40px -22px;
+		}
+		
+		.jsis-form-field-trigger-double
+		{
+			background:				none;
+		}
+		
+			.jsis-form-field-trigger-up
+			{
+				background:		url(images/form_triggers_spinner.png);
+				height:			12px;
+				width:			20px;
+			}
+			
+			.jsis-form-field-trigger-up:hover
+			{
+				background-position: -20px 0;
+			}
+			
+			.jsis-form-field-trigger-up:active
+			{
+				background-position: -40px 0;
+			}
+		
+			.jsis-form-field-trigger-down
+			{
+				background:		url(images/form_triggers_spinner.png);
+				background-position: 0 -12px;
+				height:			12px;
+				width:			20px;
+			}
+			
+			.jsis-form-field-trigger-down:hover
+			{
+				background-position: -20px -12px;
+			}
+			
+			.jsis-form-field-trigger-down:active
+			{
+				background-position: -40px -12px;
+			}
+			
+			.jsis-spinner
+			{
+				background:			url(images/slider_bg_off.png);
+				margin-top:			7px;
+				height:				10px;
+				position:			relative;
+			}
+			
+			.jsis-spinner-start
+			{
+				background:			url(images/slider_bg_start.png) no-repeat left;
+				padding-left:		5px;
+				height:				10px;
+			}
+			
+			.jsis-spinner-end
+			{
+				background:			url(images/slider_bg_end.png) no-repeat right;
+				padding-right:		5px;
+				height:				10px;
+			}
+			
+			.jsis-spinner-on
+			{
+				background:			url(images/slider_bg_on.png);
+				height:				10px;
+			}
+			
+				.jsis-spinner-handler
+				{
+					background:			url(images/slider_handler.png);
+					height:				18px;
+					width:				17px;
+					position:			absolute;
+					top:				-4px;
+					cursor:				pointer;
+					border:				none;
+				}
+			
+				.jsis-spinner-handler:hover
+				{
+					background-position: -17px 0;
+				}
+			
+				.jsis-spinner-handler:active
+				{
+					background-position: -34px 0;
+				}
+		
+			
+			.jsis-loader
+			{
+				background:			url(images/loader_bg_off.png);
+				margin-top:			3px;
+				height:				18px;
+				position:			relative;
+			}
+			
+				.jsis-loader-text
+				{
+					font-family:		sans-serif;
+					font-size:			10px;
+					color:				#535353;
+					position:			absolute;
+					top:				0;
+					line-height:		16px;
+					text-align:			center;
+					width:				100%;
+				}
+			
+			.jsis-loader-start
+			{
+				background:			url(images/loader_bg_start.png) no-repeat left;
+				padding-left:		1px;
+				height:				18px;
+			}
+			
+			.jsis-loader-end
+			{
+				background:			url(images/loader_bg_end.png) no-repeat right;
+				padding-right:		1px;
+				height:				18px;
+			}
+			
+			.jsis-loader-on
+			{
+				background:			url(images/loader_bg_on.png);
+				height:				18px;
+			}	
+			
+		.jsis-form-combobox-menu
+		{
+			background:			#eff2f5;
+			border:				1px solid #cfcfcf;
+			overflow:			auto;
+		}
+		
+			.jsis-form-combobox-menu-position
+			{
+				font-size:			12px;
+				font-family:		sans-serif;
+				line-height:		19px;
+				padding:			0 5px;
+				height:				20px;
+				cursor:				pointer;
+				color:				#535353;
+			}
+		
+			.jsis-form-combobox-menu-position:hover
+			{
+				background:		#e5edf5;
+			}
+	
+			.jsis-form-combobox-menu-position:active, .jsis-form-combobox-menu-position-active
+			{
+				background:		#c4d6e9;
+			}
+			
+		.jsis-form-date-menu
+		{
+			background:			#fff;
+			border:				1px solid #cfcfcf;
+		}
+			
+			.jsis-form-date-menu-month
+			{
+				height:				22px;
+				background:			url(images/form_calendar_month_bg.png) #7ca6d0 repeat-x top;
+				position:			relative;
+			}
+			
+				.jsis-form-date-menu-month-prev, .jsis-form-date-menu-month-next
+				{
+					position:			absolute;
+					background:			url(images/form_calendar_month_arrows.png);
+					height:				15px;
+					width:				15px;
+					cursor:				pointer;
+					top:				3px;				
+				}
+				
+				.jsis-form-date-menu-month-prev
+				{
+					left:				5px;
+				}
+				
+				.jsis-form-date-menu-month-prev:hover
+				{
+					background-position:-15px 0;
+				}
+				
+				.jsis-form-date-menu-month-prev:active
+				{
+					background-position:-30px 0;
+				}
+				
+				.jsis-form-date-menu-month-next
+				{
+					right:				5px;
+					background-position:0 -15px;
+				}
+				
+				.jsis-form-date-menu-month-next:hover
+				{
+					background-position:-15px -15px;
+				}
+				
+				.jsis-form-date-menu-month-next:active
+				{
+					background-position:-30px -15px;
+				}
+			
+				.jsis-form-date-menu-month-current
+				{
+					font-size:			12px;
+					font-family:		sans-serif;
+					color:				#535353;
+					font-weight:		bold;
+					text-align:			center;
+					line-height:		22px;
+					width:				100%;
+					position:			absolute;
+					display:			block;
+				}
+				
+				.jsis-form-date-menu-week
+				{
+					background:			#eff2f5;
+					border-bottom:		1px solid #cfcfcf;
+					height:				18px;
+				}
+				
+					.jsis-form-date-menu-week span
+					{
+						font-size:			12px;
+						font-family:		sans-serif;
+						color:				#535353;
+						font-weight:		bold;
+						width:				25px;
+						float:				left;
+						text-align:			center;
+						display:			block;
+						margin:				1px;
+					}
+					
+				.jsis-form-date-menu-dayline
+				{
+					height:				25px;
+				}
+				
+					.jsis-form-date-menu-dayline span
+					{
+						font-size:			12px;
+						font-family:		sans-serif;
+						color:				#535353;
+						font-weight:		bold;
+						width:				25px;
+						height:				23px;
+						margin:				1px;
+						line-height:		25px;
+						float:				left;
+						text-align:			center;
+						display:			block;
+						cursor:				pointer;
+					}
+				
+					.jsis-form-date-menu-dayline span.next, .jsis-form-date-menu-dayline span.prev
+					{
+						font-weight:		normal;
+						color:				#bbb;
+						background:			transparent !important; 
+					}
+				
+					.jsis-form-date-menu-dayline span:hover
+					{
+						background:			url(images/form_calendar_days_bg.png);
+						background-position:0 -23px;
+					}
+				
+					.jsis-form-date-menu-dayline span:active
+					{
+						background:			url(images/form_calendar_days_bg.png);
+						background-position:-25px 0;
+					}
+				
+					.jsis-form-date-menu-dayline span.active
+					{
+						background:			url(images/form_calendar_days_bg.png);
+						background-position:-25px -23px;
+						color:				#535353;
+					}
+	
+</style>
+</head>
+<body>
+
+<div class="jsis-wrap-darker jsis-wrap-darker-border" style="width:800px; height:500px; left:0; top:0; position:absolute;">
+	<div class="jsis-titlebar">Left header</div>
+	<div class="jsis-body"></div>
+	<div class="jsis-button-body"></div>
+</div>
+<div class="jsis-wrap jsis-wrap-border" style="width:1000px; height:500px; left:800px; top:0; position:absolute;">
+	<div class="jsis-titlebar">
+		<span class="jsis-titlebuttons jsis-titlebuttons-left">
+			<a href="#" class="jsis-titlebutton">
+				<span class="jsis-titlebutton-icon jsis-titlebutton-icon-ask"></span>
+			</a>
+			<a href="#" class="jsis-titlebutton">
+				<span class="jsis-titlebutton-icon jsis-titlebutton-icon-pin"></span>
+			</a>
+		</span> 
+		<span class="jsis-titlebuttons jsis-titlebuttons-right">
+			<a href="#" class="jsis-titlebutton">
+				<span class="jsis-titlebutton-icon jsis-titlebutton-icon-down"></span>
+			</a>
+			<a href="#" class="jsis-titlebutton">
+				<span class="jsis-titlebutton-icon jsis-titlebutton-icon-min"></span>
+			</a>
+			<a href="#" class="jsis-titlebutton">
+				<span class="jsis-titlebutton-icon jsis-titlebutton-icon-max"></span>
+			</a>
+			<a href="#" class="jsis-titlebutton jsis-titlebutton-red">
+				<span class="jsis-titlebutton-icon jsis-titlebutton-icon-x"></span>
+			</a>
+		</span>
+		<span class="jsis-window-title">Nazwa panelu prawego</span> 
+	</div>
+	<div class="jsis-body"></div>
+	<div class="jsis-button-body" style="position:absolute;bottom:0px;">
+		<div class="jsis-button-wrap">OK</div>	
+	</div>
+</div>
+
+<div class="jsis-window-wrap" style="position:absolute; left:350px; top:270px; height:600px; width:800px;">
+	<div class="jsis-window-border-top">
+		<div class="jsis-window-titlebar">
+			<img src="logo-ico.png" class="jsis-window-titleicon" />
+			<span class="jsis-window-titlebuttons jsis-window-titlebuttons-left">
+				<a href="#" class="jsis-window-titlebutton">
+					<span class="jsis-titlebutton-icon jsis-titlebutton-icon-ask"></span>
+				</a>
+				<a href="#" class="jsis-window-titlebutton">
+					<span class="jsis-titlebutton-icon jsis-titlebutton-icon-pin"></span>
+				</a>
+			</span> 
+			<span class="jsis-window-titlebuttons jsis-window-titlebuttons-right">
+				<a href="#" class="jsis-window-titlebutton">
+					<span class="jsis-titlebutton-icon jsis-titlebutton-icon-down"></span>
+				</a>
+				<a href="#" class="jsis-window-titlebutton">
+					<span class="jsis-titlebutton-icon jsis-titlebutton-icon-min"></span>
+				</a>
+				<a href="#" class="jsis-window-titlebutton">
+					<span class="jsis-titlebutton-icon jsis-titlebutton-icon-max"></span>
+				</a>
+				<a href="#" class="jsis-window-titlebutton jsis-window-titlebutton-red">
+					<span class="jsis-titlebutton-icon jsis-titlebutton-icon-x"></span>
+				</a>
+			</span> 
+			<span class="jsis-window-title">Nazwa okna</span>
+		</div>
+	</div>
+	<div class="jsis-window-border-bottom">
+		<div class="jsis-window-border-left">
+			<div class="jsis-window-border-right">
+				<div class="jsis-window-body" style="height:550px; width:790px;">
+					
+					<div class="jsis-toolbar-menu" style="position:absolute; width:130px; height:59px; left:715px; top:25px; z-index:5000;">
+						<div class="jsis-toolbar-menu-position">
+							Zamknij wszystko
+							<span class="jsis-toolbar-menu-position-trigger"></span>
+						</div>
+						<div class="jsis-toolbar-menu-position">Zamknij okno</div>
+						<div class="jsis-toolbar-menu-position jsis-toolbar-menu-position-last">Zamknij nic</div>
+					</div>
+					
+					<div class="jsis-form-combobox-menu" style="height: 100px; left: 530px; position: absolute; top: 153px; width: 205px; z-index: 5000;">
+						<div class="jsis-form-combobox-menu-position">Piekarz</div>
+						<div class="jsis-form-combobox-menu-position">Lekarz</div>
+						<div class="jsis-form-combobox-menu-position jsis-form-combobox-menu-position-active">Rybak</div>
+						<div class="jsis-form-combobox-menu-position">Aptekarz</div>
+						<div class="jsis-form-combobox-menu-position">Sekretarka</div>
+						<div class="jsis-form-combobox-menu-position">Marynarka</div>
+					</div>
+					
+					<div class="jsis-form-date-menu" style="height: 165px; left: 530px; position: absolute; top: 282px; width: 189px; z-index: 5000;">
+						<div class="jsis-form-date-menu-month">
+							<span class="jsis-form-date-menu-month-current">Marzec 2011</span>
+							<span class="jsis-form-date-menu-month-prev"></span>
+							<span class="jsis-form-date-menu-month-next"></span>
+						</div>
+						<div class="jsis-form-date-menu-week">
+							<span>Po</span>
+							<span>Wt</span>
+							<span>Śr</span>
+							<span>Cz</span>
+							<span>Pi</span>
+							<span>So</span>
+							<span>Ni</span>
+						</div>
+						<div class="jsis-form-date-menu-dayline">
+							<span class="prev">31</span>
+							<span>1</span>
+							<span>2</span>
+							<span>3</span>
+							<span>4</span>
+							<span>5</span>
+							<span>6</span>
+						</div>
+						<div class="jsis-form-date-menu-dayline">
+							<span>7</span>
+							<span>8</span>
+							<span>9</span>
+							<span>10</span>
+							<span class="active">11</span>
+							<span>12</span>
+							<span>13</span>
+						</div>
+						<div class="jsis-form-date-menu-dayline">
+							<span>14</span>
+							<span>15</span>
+							<span>16</span>
+							<span>17</span>
+							<span>18</span>
+							<span>19</span>
+							<span>20</span>
+						</div>
+						<div class="jsis-form-date-menu-dayline">
+							<span>21</span>
+							<span>22</span>
+							<span>23</span>
+							<span>24</span>
+							<span>25</span>
+							<span>26</span>
+							<span>27</span>
+						</div>
+						<div class="jsis-form-date-menu-dayline">
+							<span>28</span>
+							<span>29</span>
+							<span>30</span>
+							<span class="next">1</span>
+							<span class="next">2</span>
+							<span class="next">3</span>
+							<span class="next">4</span>
+						</div>
+					</div>
+					
+					<div class="jsis-empty-wrap" style="width: 790px; height:25px;">
+						<div class="jsis-empty-body">
+							<div class="jsis-toolbar">
+								<div class="jsis-toolbar-left">
+									<div class="jsis-toolbar-button jsis-toolbar-menubutton">
+										Plik
+										<span class="jsis-toolbar-menubutton-trigger">
+										</span>
+									</div>
+									<div class="jsis-toolbar-button jsis-toolbar-menubutton">
+										Plik
+										<span class="jsis-toolbar-menubutton-trigger">
+										</span>
+									</div>
+									<div class="jsis-toolbar-button">Edytuj</div>
+								</div>
+								<div class="jsis-toolbar-right">
+									<div class="jsis-toolbar-button jsis-toolbar-menubutton jsis-toolbar-button-clicked">
+										Zamknij
+										<span class="jsis-toolbar-menubutton-trigger">
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="jsis-wrap" style="width:788px; height:490px; left:0px; top:25px; position:absolute;">
+						<div class="jsis-body" style="position:absolute;top:15px;left:15px;">
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:0;">
+								<div class="jsis-empty-body">
+									<label for="jsis-id-1" class="jsis-form-label jsis-form-layout-label">Imię:</label>
+								</div>
+							</div>
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:150px; width:200px;">
+								<div class="jsis-empty-body">
+									<input id="jsis-id-1" type="text" class="jsis-form-field" style="width:200px;" />
+								</div>
+							</div>
+						</div>
+						<div class="jsis-body" style="position:absolute;top:45px;left:15px;">
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:0;">
+								<div class="jsis-empty-body">
+									<label for="jsis-id-1" class="jsis-form-label jsis-form-layout-label">Nazwisko:</label>
+								</div>
+							</div>
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:150px; width:200px;">
+								<div class="jsis-empty-body">
+									<input id="jsis-id-1" type="text" class="jsis-form-field" style="width:200px;" />
+								</div>
+							</div>
+						</div>
+						<div class="jsis-body" style="position:absolute;top:75px;left:15px;">
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:0;">
+								<div class="jsis-empty-body">
+									<label for="jsis-id-1" class="jsis-form-label jsis-form-layout-label">Płeć:</label>
+								</div>
+							</div>
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:150px; width:200px;">
+								<div class="jsis-empty-body">
+									<div class="jsis-empty-body jsis-form-radio-container">
+										<input type="button" class="jsis-form-radio" name="gender" id="jsis-id-2" /><label for="jsis-id-2" class="jsis-form-label jsis-form-radio-label">Mężczyżna</label>
+									</div>
+									<div class="jsis-empty-body jsis-form-radio-container">
+										<input type="button" class="jsis-form-radio" name="gender" id="jsis-id-3" /><label for="jsis-id-3" class="jsis-form-label jsis-form-radio-label">Kobieta</label>
+									</div>
+									<div class="jsis-empty-body jsis-form-radio-container">
+										<input type="button" class="jsis-form-radio jsis-form-radio-checked" name="gender" id="jsis-id-4" /><label for="jsis-id-4" class="jsis-form-label jsis-form-radio-label">Nieistotne</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="jsis-body" style="position:absolute;top:140px;left:15px;">
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:0;">
+								<div class="jsis-empty-body">
+									<label for="jsis-id-1" class="jsis-form-label jsis-form-layout-label">Zainteresowania:</label>
+								</div>
+							</div>
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:150px; width:200px;">
+								<div class="jsis-empty-body">
+									<div class="jsis-empty-body jsis-form-checkbox-container">
+										<input type="button" class="jsis-form-checkbox" name="interest" id="jsis-id-5" /><label for="jsis-id-5" class="jsis-form-label jsis-form-checkbox-label">Oglądanie</label>
+									</div>
+									<div class="jsis-empty-body jsis-form-checkbox-container">
+										<input type="button" class="jsis-form-checkbox" name="interest" id="jsis-id-6" /><label for="jsis-id-6" class="jsis-form-label jsis-form-checkbox-label">Sprzątanie</label>
+									</div>
+									<div class="jsis-empty-body jsis-form-checkbox-container">
+										<input type="button" class="jsis-form-checkbox jsis-form-checkbox-checked" name="interest" id="jsis-id-7" /><label for="jsis-id-7" class="jsis-form-label jsis-form-checkbox-label">Nieistotne</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="jsis-body" style="position:absolute;top:205px;left:15px;">
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:0;">
+								<div class="jsis-empty-body">
+									<label for="jsis-id-1" class="jsis-form-label jsis-form-layout-label">Opis:</label>
+								</div>
+							</div>
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:150px; height: 30px; width:200px;">
+								<div class="jsis-empty-body">
+									<textarea class="jsis-form-textarea" style="width:200px;" cols="20" rows="3">Witam! To jest bardzo długi opis bardzo różnorodny i bardzo nieciekawy, ale za to dobrze zapełniający przestrzeń inputa!</textarea>
+								</div>
+							</div>
+						</div>
+						<div class="jsis-body" style="position:absolute;top:285px;left:15px;">
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:0;">
+								<div class="jsis-empty-body">
+									<label for="jsis-id-10" class="jsis-form-label jsis-form-layout-label">Zawód:</label>
+								</div>
+							</div>
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:150px; width:207px;">
+								<div class="jsis-empty-body">
+									<div class="jsis-form-field-trigger jsis-form-field-trigger-combobox"></div>
+									<input id="jsis-id-10" type="text" class="jsis-form-field" style="width:180px;" />
+								</div>
+							</div>
+						</div>
+						<div class="jsis-body" style="position:absolute;top:320px;left:15px;">
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:0;">
+								<div class="jsis-empty-body">
+									<label for="jsis-id-10" class="jsis-form-label jsis-form-layout-label">Data:</label>
+								</div>
+							</div>
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:150px; width:207px;">
+								<div class="jsis-empty-body">
+									<div class="jsis-form-field-trigger jsis-form-field-trigger-date"></div>
+									<input id="jsis-id-10" type="text" class="jsis-form-field" style="width:180px;" />
+								</div>
+							</div>
+						</div>
+						<div class="jsis-body" style="position:absolute;top:355px;left:15px;">
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:0;">
+								<div class="jsis-empty-body">
+									<label for="jsis-id-10" class="jsis-form-label jsis-form-layout-label">Wiek:</label>
+								</div>
+							</div>
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:150px; width:207px;">
+								<div class="jsis-empty-body">
+									<div class="jsis-form-field-trigger jsis-form-field-trigger-double">
+									<div class="jsis-form-field-trigger-up"></div>
+									<div class="jsis-form-field-trigger-down"></div>
+									</div>
+									<input id="jsis-id-10" type="text" class="jsis-form-field" style="width:180px;" />
+								</div>
+							</div>
+						</div>
+						<div class="jsis-body" style="position:absolute;top:385px;left:15px;">
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:0;">
+								<div class="jsis-empty-body">
+									<label for="jsis-id-10" class="jsis-form-label jsis-form-layout-label">Waga:</label>
+								</div>
+							</div>
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:150px; width:207px;">
+								<div class="jsis-empty-body">
+									<div class="jsis-spinner" style="width:210px;">
+										<input type="button" class="jsis-spinner-handler" style="left:31.5px;" />
+										<div class="jsis-spinner-start" style="width:205px;">
+											<div class="jsis-spinner-end" style="width:200px;">
+												<div class="jsis-spinner-on" style="width:40px;"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="jsis-body" style="position:absolute;top:410px;left:15px;">
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:0;">
+								<div class="jsis-empty-body">
+									<label for="jsis-id-10" class="jsis-form-label jsis-form-layout-label">Postęp:</label>
+								</div>
+							</div>
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:150px; width:207px;">
+								<div class="jsis-empty-body">
+									<div class="jsis-loader" style="width:210px;">
+										<div class="jsis-loader-start" style="width:209px;">
+											<div class="jsis-loader-end" style="width:208px;">
+												<div class="jsis-loader-on" style="width:70px;"></div>
+												<span class="jsis-loader-text">Trwa ładowanie...</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="jsis-body" style="position:absolute;top:105px;left:380px;">
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:0;">
+								<div class="jsis-empty-body">
+									<label for="jsis-id-10" class="jsis-form-label jsis-form-layout-label">Zawód:</label>
+								</div>
+							</div>
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:150px; width:207px;">
+								<div class="jsis-empty-body">
+									<div class="jsis-form-field-trigger jsis-form-field-trigger-combobox-active"></div>
+									<input id="jsis-id-10" type="text" class="jsis-form-field" style="width:180px;" />
+								</div>
+							</div>
+						</div>
+						<div class="jsis-body" style="position:absolute;top:235px;left:380px;">
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:0;">
+								<div class="jsis-empty-body">
+									<label for="jsis-id-10" class="jsis-form-label jsis-form-layout-label">Data:</label>
+								</div>
+							</div>
+							<div class="jsis-empty-wrap" style="position:absolute;top:0;left:150px; width:207px;">
+								<div class="jsis-empty-body">
+									<div class="jsis-form-field-trigger jsis-form-field-trigger-date-active"></div>
+									<input id="jsis-id-10" type="text" class="jsis-form-field" style="width:180px;" value="11-03-2011" />
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="jsis-button-body" style="position:absolute;bottom:0px;width:100%;">
+						<input type="button" class="jsis-button-wrap" value="OK" />
+						<input type="button" class="jsis-button-wrap" value="Zajebiście" />	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
